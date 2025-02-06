@@ -11,4 +11,15 @@
     <Folder Include="Services\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SWD.Repository\SWD.Repository.csproj">
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
+
 </Project>
