@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using SWD.Repository.Interface;
+using SWD.Repository.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +14,7 @@ namespace SWD.Repository
         public static IServiceCollection AddServices(this IServiceCollection service)
         {
             //service.AddTransient<IRoomService, RoomService>();
+            service.AddTransient<IStockRopository, StockRepository>();
             return service;
         }
     }

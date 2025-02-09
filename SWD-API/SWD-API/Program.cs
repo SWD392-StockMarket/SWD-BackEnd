@@ -1,6 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using SWD.Data;
+using SWD.Repository;
 
 namespace SWD_API
 {
@@ -18,6 +19,7 @@ namespace SWD_API
             builder.Services.AddDbContext<StockMarketDbContext>(options =>
                         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            builder.Services.AddServices();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
