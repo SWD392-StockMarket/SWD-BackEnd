@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using SWD.Data;
+
 namespace SWD_API
 {
     public class Program
@@ -11,6 +14,10 @@ namespace SWD_API
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+            builder.Services.AddDbContext<StockMarketDbContext>(options =>
+                        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
