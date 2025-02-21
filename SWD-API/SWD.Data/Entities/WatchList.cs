@@ -1,25 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SWD.Data.Entities
+namespace SWD.Data.Entities;
+
+public partial class WatchList
 {
-    public class WatchList
-    {
-        [Key]
-        public int WatchListID { get; set; }
+    public int WatchListId { get; set; }
 
-        public int UserID { get; set; }
-        public User User { get; set; }
+    public int? UserId { get; set; }
 
-        public string Label { get; set; }
-        public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
-        public DateTime LastEdited { get; set; } = DateTime.UtcNow;
-        public string Status { get; set; }
+    public string? Label { get; set; }
 
-        public ICollection<StockWatchList> StockWatchLists { get; set; }
-    }
+    public DateTime? CreatedDate { get; set; }
+
+    public DateTime? LastEdited { get; set; }
+
+    public string? Status { get; set; }
+
+    public virtual User? User { get; set; }
+
+    public virtual ICollection<Stock> Stocks { get; set; } = new List<Stock>();
 }

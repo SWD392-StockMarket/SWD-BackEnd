@@ -1,22 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SWD.Data.Entities
+namespace SWD.Data.Entities;
+
+public partial class Session
 {
-    public class Session
-    {
-        [Key]
-        public int SessionID { get; set; }
+    public int SessionId { get; set; }
 
-        public string SessionType { get; set; }
-        public DateTime? StartTime { get; set; }
-        public DateTime? EndTime { get; set; }
-        public string Status { get; set; }
+    public string? SessionType { get; set; }
 
-        public ICollection<StockInSession> StockInSessions { get; set; }
-    }
+    public DateTime? StartTime { get; set; }
+
+    public DateTime? EndTime { get; set; }
+
+    public string? Status { get; set; }
+
+    public virtual ICollection<StockInSession> StockInSessions { get; set; } = new List<StockInSession>();
 }

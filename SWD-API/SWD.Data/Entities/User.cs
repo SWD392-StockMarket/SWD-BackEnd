@@ -1,38 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SWD.Data.Entities
+namespace SWD.Data.Entities;
+
+public partial class User
 {
-    public class User
-    {
-        [Key]
-        public int UserID { get; set; }
+    public int UserId { get; set; }
 
-        [Required, MaxLength(255)]
-        public string Username { get; set; }
+    public string Username { get; set; } = null!;
 
-        [Required, MaxLength(255)]
-        public string Password { get; set; }
+    public string Password { get; set; } = null!;
 
-        [Required, MaxLength(255)]
-        public string Email { get; set; }
+    public string Email { get; set; } = null!;
 
-        [Required, MaxLength(50)]
-        public string Role { get; set; }
+    public string? Role { get; set; }
 
-        [MaxLength(50)]
-        public string Status { get; set; }
+    public string? Status { get; set; }
 
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime LastEdited { get; set; } = DateTime.UtcNow;
+    public DateTime? CreatedAt { get; set; }
 
-        [MaxLength(50)]
-        public string SubscriptionStatus { get; set; }
+    public DateTime? LastEdited { get; set; }
 
-        public ICollection<WatchList> WatchLists { get; set; }
-    }
+    public string? SubscriptionStatus { get; set; }
+
+    public virtual ICollection<News> News { get; set; } = new List<News>();
+
+    public virtual ICollection<NotificationUser> NotificationUsers { get; set; } = new List<NotificationUser>();
+
+    public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
+
+    public virtual ICollection<WatchList> WatchLists { get; set; } = new List<WatchList>();
 }

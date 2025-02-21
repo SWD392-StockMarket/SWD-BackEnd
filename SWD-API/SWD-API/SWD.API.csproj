@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SWD.Repository\SWD.Repository.csproj" />
     <ProjectReference Include="..\SWD.Service\SWD.Service.csproj">
       <Private>True</Private>
     </ProjectReference>

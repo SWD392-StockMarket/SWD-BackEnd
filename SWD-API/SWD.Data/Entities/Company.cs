@@ -1,23 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SWD.Data.Entities
+namespace SWD.Data.Entities;
+
+public partial class Company
 {
-    public class Company
-    {
-        [Key]
-        public int CompanyID { get; set; }
+    public int CompanyId { get; set; }
 
-        [Required, MaxLength(255)]
-        public string CompanyName { get; set; }
+    public string CompanyName { get; set; } = null!;
 
-        public string CEO { get; set; }
-        public string Information { get; set; }
+    public string? Ceo { get; set; }
 
-        public ICollection<Stock> Stocks { get; set; }
-    }
+    public string? Information { get; set; }
+
+    public virtual ICollection<Stock> Stocks { get; set; } = new List<Stock>();
 }

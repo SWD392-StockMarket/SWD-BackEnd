@@ -18,6 +18,7 @@ namespace SWD_API.Controllers
 
 
         [HttpGet]
+        [Route("stocks")]
         public async Task<ActionResult<ICollection<Stock>>> GetStocks()
         {
             var stocks = await _repo.GetAllStocksAsync(); 
