@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace SWD.Data.Entities;
 
 public partial class Notification
 {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int NotificationId { get; set; }
-
+    [ForeignKey("User")]
     public int? StaffId { get; set; }
 
     public string? Content { get; set; }

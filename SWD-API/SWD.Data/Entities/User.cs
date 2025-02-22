@@ -1,20 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 
 namespace SWD.Data.Entities;
 
-public partial class User
-{
-    public int UserId { get; set; }
-
-    public string Username { get; set; } = null!;
-
-    public string Password { get; set; } = null!;
-
-    public string Email { get; set; } = null!;
-
-    public string? Role { get; set; }
-
+public partial class User  : IdentityUser<int>
+{ 
     public string? Status { get; set; }
 
     public DateTime? CreatedAt { get; set; }

@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace SWD.Data.Entities;
 
 public partial class Stock
 {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int StockId { get; set; }
 
     public int? CompanyId { get; set; }
-
+    [Required]
     public string StockSymbol { get; set; } = null!;
 
     public int? MarketId { get; set; }

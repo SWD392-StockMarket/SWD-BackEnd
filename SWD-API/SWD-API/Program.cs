@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using SWD.Data;
+using SWD.Data.Entities;
 using SWD.Repository;
 using System.Text;
 
@@ -57,7 +58,9 @@ namespace SWD_API
 
             });
             builder.Services.AddAuthorization();
-
+            builder.Services.AddIdentity<User, IdentityRole<int>>()
+                .AddEntityFrameworkStores<StockMarketDbContext>()
+                .AddDefaultTokenProviders();
 
             var app = builder.Build();
 

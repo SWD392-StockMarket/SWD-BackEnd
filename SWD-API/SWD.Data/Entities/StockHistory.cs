@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace SWD.Data.Entities;
 
 public partial class StockHistory
 {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int StockHistoryId { get; set; }
 
     public string StockSymbol { get; set; } = null!;
@@ -21,5 +25,5 @@ public partial class StockHistory
 
     public string? Rcreasonchange { get; set; }
 
-    public DateTime? CreatedDate { get; set; }
+    public DateTime? CreatedDate { get; set; } = DateTime.Now;
 }
