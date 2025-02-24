@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SWD.Data.DTOs.Authentication
 {
-    public class LogoutRequestDTO
+    public class AuthenticationResponse
     {
-        public string RefreshToken { get; set; }
+        public string Token { get; set; } = string.Empty;
     }
 }

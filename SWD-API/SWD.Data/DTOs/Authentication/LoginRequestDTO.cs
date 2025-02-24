@@ -11,7 +11,7 @@ namespace SWD.Data.DTOs.Authentication
     {
         [Required]
         [DataType(DataType.EmailAddress)]
-        public string Username { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
 
         [Required]
         [DataType(DataType.Password)]

@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SWD.Repository.Interface
+namespace SWD.Data.DTOs.Authentication
 {
-    internal interface IStockRepository
+    public class LoginGoogleDTO
     {
+        public string Email { get; set; } = string.Empty;
     }
 }

@@ -4,9 +4,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using SWD.Data;
 using SWD.Data.Entities;
 using SWD.Repository;
+using SWD.Service;
+using System;
+using System.Reflection;
 using System.Text;
 
 namespace SWD_API
@@ -17,17 +21,26 @@ namespace SWD_API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+                
+            
 
             builder.Services.AddDbContext<StockMarketDbContext>(options =>
                         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            builder.Services.AddServices();
+            builder.Services.AddServices().AddRepositories();
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(c=>
+            {
+                c.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "Bearer"
+                });
+            });
+         
+
 
 
             //identity autho,authen
@@ -57,10 +70,17 @@ namespace SWD_API
                 };
 
             });
+
+            
+
             builder.Services.AddAuthorization();
-            builder.Services.AddIdentity<User, IdentityRole<int>>()
-                .AddEntityFrameworkStores<StockMarketDbContext>()
-                .AddDefaultTokenProviders();
+
+            builder.Services.AddIdentityApiEndpoints<User>()
+                .AddRoles<IdentityRole<int>>()
+                .AddEntityFrameworkStores<StockMarketDbContext>();
+            //.AddDefaultTokenProviders();
+
+
 
             var app = builder.Build();
 
@@ -70,7 +90,7 @@ namespace SWD_API
             
 
             app.UseHttpsRedirection();
-
+            app.MapGroup("api/identity").MapIdentityApi<User>();
             app.UseAuthentication();
             app.UseAuthorization();
 

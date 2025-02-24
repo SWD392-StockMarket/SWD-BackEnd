@@ -11,9 +11,9 @@ namespace SWD.Repository
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddServices(this IServiceCollection service)
+        public static IServiceCollection AddRepositories(this IServiceCollection service)
         {
-            //service.AddTransient<IRoomService, RoomService>();
+            service.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             service.AddTransient<IStockRopository, StockRepository>();
             return service;
         }

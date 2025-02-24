@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using SWD.Service.Interface;
+using SWD.Service.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +13,8 @@ namespace SWD.Service
     {
         public static IServiceCollection AddServices(this IServiceCollection service)
         {
+            service.AddTransient<IAuthService, AuthService>();
+            service.AddTransient<IStockService, StockService>();
             //service.AddTransient<IRoomService, RoomService>();
             return service;
         }
