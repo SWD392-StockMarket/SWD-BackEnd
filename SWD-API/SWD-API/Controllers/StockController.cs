@@ -25,8 +25,15 @@ namespace SWD_API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetStocks([FromQuery] string? searchTerm, [FromQuery] string? sortColumn, [FromQuery] string? sortOrder, [FromQuery] int page = 1, [FromQuery] int pageSize = 20)
         {
-            var stocks = await _stockService.GetStocksAsync(searchTerm, sortColumn, sortOrder, page, pageSize);
-            return Ok(stocks);
+            try
+            {
+                var stocks = await _stockService.GetStocksAsync(searchTerm, sortColumn, sortOrder, page, pageSize);
+                return Ok(stocks);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while retrieving stocks.", Error = ex.Message });
+            }
         }
         /// <summary>
         /// Get stock by ID
@@ -34,8 +41,19 @@ namespace SWD_API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetStockById(int id)
         {
-            var stock = await _stockService.GetStockById(id);
-            return Ok(stock);
+            try
+            {
+                var stock = await _stockService.GetStockById(id);
+                return Ok(stock);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound(new { Message = $"Stock with ID {id} not found." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while retrieving stock.", Error = ex.Message });
+            }
         }
         /// <summary>
         /// Create a new stock
@@ -43,8 +61,19 @@ namespace SWD_API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateStock([FromBody] CreateStockDTO dto)
         {
-            var createdStock = await _stockService.CreateStock(dto);
-            return CreatedAtAction(nameof(GetStockById), new { id = createdStock.StockId }, createdStock);
+            if (dto == null)
+                return BadRequest(new { Message = "Invalid stock data." });
+
+            try
+            {
+                var createdStock = await _stockService.CreateStock(dto);
+                //return CreatedAtAction(nameof(GetStockById), new { id = createdStock.StockId }, createdStock);
+                return Ok(createdStock);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while creating stock.", Error = ex.Message });
+            }
         }
         /// <summary>
         /// Update an existing stock
@@ -52,8 +81,22 @@ namespace SWD_API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateStock(int id, [FromBody] UpdateStockDTO dto)
         {
-            var updatedStock = await _stockService.UpdateStock(id, dto);
-            return Ok(updatedStock);
+            if (dto == null)
+                return BadRequest(new { Message = "Invalid stock data." });
+
+            try
+            {
+                var updatedStock = await _stockService.UpdateStock(id, dto);
+                return Ok(updatedStock);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound(new { Message = $"Stock with ID {id} not found." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while updating stock.", Error = ex.Message });
+            }
         }
 
         /// <summary>
@@ -62,12 +105,18 @@ namespace SWD_API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStock(int id)
         {
-            var result = await _stockService.DeleteStock(id);
-            if (result)
+            try
             {
-                return NoContent();
+                var result = await _stockService.DeleteStock(id);
+                if (result)
+                    return NoContent();
+
+                return NotFound(new { Message = $"Stock with ID {id} not found." });
             }
-            return NotFound("Stock not found");
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while deleting stock.", Error = ex.Message });
+            }
         }
     }
 }
