@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SWD.Repository.Interface
 {
-    public interface IStockHistoryRepository : IRepository<StockHistory>
+    public interface INotificationRepository : IRepository<Notification>
     {
     }
 }
