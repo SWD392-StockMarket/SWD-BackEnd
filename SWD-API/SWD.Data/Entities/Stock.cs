@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace SWD.Data.Entities;
 
@@ -22,8 +23,8 @@ public partial class Stock
     public virtual Company? Company { get; set; }
 
     public virtual Market? Market { get; set; }
-
+    [JsonIgnore]
     public virtual ICollection<StockInSession> StockInSessions { get; set; } = new List<StockInSession>();
-
+    [JsonIgnore]
     public virtual ICollection<WatchList> WatchLists { get; set; } = new List<WatchList>();
 }

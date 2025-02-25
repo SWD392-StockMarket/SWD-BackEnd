@@ -23,8 +23,8 @@ namespace SWD.Data.DTOs.Stock
 
         public string? MarketName { get; set; }
 
-        //public virtual ICollection<StockInSession> StockInSessions { get; set; } = new List<StockInSession>();
+        public virtual ICollection<StockInSession> StockInSessions { get; set; } = new List<StockInSession>();
 
-        //public virtual ICollection<WatchList> WatchLists { get; set; } = new List<WatchList>();
+        public virtual ICollection<WatchList> WatchLists { get; set; } = new List<WatchList>();
     }
 }

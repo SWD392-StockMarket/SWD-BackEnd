@@ -60,7 +60,7 @@ namespace SWD.Service.Services
 
         public async Task<StockDTO> GetStockById(int id)
         {
-            var stock = await _stockRopository.GetAsync(s => s.StockId == id, includeProperties: "Company,Market") ?? throw new KeyNotFoundException("Stock is not found");
+            var stock = await _stockRopository.GetAsync(s => s.StockId == id, includeProperties: "Company,Market,StockInSessions,WatchLists") ?? throw new KeyNotFoundException("Stock is not found");
             return new StockDTO
             {
                 StockId = stock.StockId,
@@ -70,14 +70,14 @@ namespace SWD.Service.Services
                 ListedDate = stock.ListedDate,
                 CompanyName = stock.Company?.CompanyName,
                 MarketName = stock.Market?.MarketName,
-                //StockInSessions = stock.StockInSessions.ToList(),
-                //WatchLists = stock.WatchLists.ToList()
+                StockInSessions = stock.StockInSessions.ToList(),
+                WatchLists = stock.WatchLists.ToList()
             };
         }
 
         public async Task<PageListResponse<StockDTO>> GetStocksAsync(string? searchTerm, string? sortColumn, string? sortOrder, int page = 1, int pageSize = 20)
         {
-            var categories = await _stockRopository.GetAllAsync(includeProperties: "Company,Market");
+            var categories = await _stockRopository.GetAllAsync(includeProperties: "Company,Market,StockInSessions,WatchLists");
 
 
             // Apply search filter if searchTerm is provided
@@ -122,7 +122,7 @@ namespace SWD.Service.Services
 
         public async Task<StockDTO> UpdateStock(int id, UpdateStockDTO dto)
         {
-            var stock = await _stockRopository.GetAsync(s => s.StockId == id, includeProperties: "Company,Market");
+            var stock = await _stockRopository.GetAsync(s => s.StockId == id, includeProperties: "Company,Market,StockInSessions,WatchLists");
 
             if (stock == null)
             {
@@ -148,8 +148,8 @@ namespace SWD.Service.Services
                 ListedDate = updatedStock.ListedDate,
                 CompanyName = updatedStock.Company?.CompanyName,
                 MarketName = updatedStock.Market?.MarketName,
-                //StockInSessions = updatedStock.StockInSessions.ToList(),
-                //WatchLists = updatedStock.WatchLists.ToList()
+                StockInSessions = updatedStock.StockInSessions.ToList(),
+                WatchLists = updatedStock.WatchLists.ToList()
             };
         }
         private static Func<Stock, object> GetSortProperty(string SortColumn)
@@ -174,8 +174,8 @@ namespace SWD.Service.Services
                 ListedDate = s.ListedDate,
                 CompanyName = s.Company?.CompanyName,
                 MarketName = s.Market?.MarketName,
-                //StockInSessions = s.StockInSessions.ToList(), 
-                //WatchLists = s.WatchLists.ToList() 
+                StockInSessions = s.StockInSessions.ToList(),
+                WatchLists = s.WatchLists.ToList()
 
             }).ToList();
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace SWD.Data.Entities;
 
@@ -16,6 +17,6 @@ public class Company
     public string? Ceo { get; set; }
 
     public string? Information { get; set; }
-
+    [JsonIgnore]
     public virtual ICollection<Stock> Stocks { get; set; } = new List<Stock>();
 }

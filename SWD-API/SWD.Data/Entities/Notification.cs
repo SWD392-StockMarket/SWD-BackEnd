@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace SWD.Data.Entities;
 
@@ -22,7 +23,7 @@ public partial class Notification
     public DateTime? CreatedDate { get; set; }
 
     public DateTime? UpdatedDate { get; set; }
-
+    [JsonIgnore]
     public virtual ICollection<NotificationUser> NotificationUsers { get; set; } = new List<NotificationUser>();
 
     public virtual User? Staff { get; set; }
