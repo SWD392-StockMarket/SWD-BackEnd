@@ -16,9 +16,12 @@ namespace SWD.Service.Services
     public class StockService : IStockService
     {
         public readonly IStockRopository _stockRopository;
-        public StockService(IStockRopository stockRopository)
+        public readonly IStockHistoryRepository _stockHistoryRepository;
+        
+        public StockService(IStockRopository stockRopository, IStockHistoryRepository stockHistoryRepository)
         {
             _stockRopository = stockRopository;
+            _stockHistoryRepository = stockHistoryRepository;
         }
 
         public async Task<StockDTO> CreateStock(CreateStockDTO dto)
@@ -152,6 +155,15 @@ namespace SWD.Service.Services
                 WatchLists = updatedStock.WatchLists.ToList()
             };
         }
+
+        public async Task<List<StockHistory>> GetStockHistoryAsync(string stockSymboll)
+        {
+            
+            var stockHistories =  await _stockHistoryRepository.GetAllAsync(h=>h.StockSymbol.Equals(stockSymboll));
+            return stockHistories.ToList();
+        }
+
+        
         private static Func<Stock, object> GetSortProperty(string SortColumn)
         {
             return SortColumn?.ToLower() switch

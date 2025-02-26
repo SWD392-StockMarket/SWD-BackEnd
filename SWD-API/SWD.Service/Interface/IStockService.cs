@@ -1,5 +1,6 @@
 ﻿using SWD.Data.DTOs;
 using SWD.Data.DTOs.Stock;
+using SWD.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,5 +21,6 @@ namespace SWD.Service.Interface
         Task<StockDTO> UpdateStock(int id, UpdateStockDTO dto);
         Task<StockDTO> CreateStock(CreateStockDTO dto);
         Task<bool> DeleteStock(int id);
+        Task<List<StockHistory>> GetStockHistoryAsync(string stockSymboll);
     }
 }

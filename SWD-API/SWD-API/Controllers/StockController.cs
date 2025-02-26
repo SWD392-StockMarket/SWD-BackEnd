@@ -118,5 +118,21 @@ namespace SWD_API.Controllers
                 return StatusCode(500, new { Message = "An error occurred while deleting stock.", Error = ex.Message });
             }
         }
+        [HttpGet("history/{stockSymbol}")]
+        public async Task<IActionResult> GetStockHistory(string stockSymbol)
+        {
+            try
+            {
+                var stockHistory = await _stockService.GetStockHistoryAsync(stockSymbol);
+                if (stockHistory == null || stockHistory.Count == 0)
+                    return NotFound(new { Message = $"No history found for stock symbol {stockSymbol}." });
+
+                return Ok(stockHistory);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while retrieving stock history.", Error = ex.Message });
+            }
+        }
     }
 }
