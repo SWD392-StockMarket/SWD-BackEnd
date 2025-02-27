@@ -16,6 +16,7 @@ namespace SWD.Service
             service.AddTransient<IAuthService, AuthService>();
             service.AddTransient<IStockService, StockService>();
             service.AddTransient<ICompanyService, CompanyService>();
+            service.AddTransient<IMarketService, MarketService>();
             //service.AddTransient<IRoomService, RoomService>();
             return service;
         }
