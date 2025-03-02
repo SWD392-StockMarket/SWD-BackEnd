@@ -1,11 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using SWD.Data.Entities;
 using SWD.Service.Interface;
 using SWD.Service.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SWD.Service
 {
@@ -19,6 +17,8 @@ namespace SWD.Service
             service.AddTransient<IMarketService, MarketService>();
             service.AddTransient<INewsService, NewsService>();
             service.AddTransient<INotificationService, NotificationService>();
+            service.AddTransient<IUserService, UserService>();
+            service.AddTransient<IEmailSender<User>, SmtpEmailSender>();
             //service.AddTransient<IRoomService, RoomService>();
             return service;
         }

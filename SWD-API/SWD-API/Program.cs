@@ -74,11 +74,13 @@ namespace SWD_API
 
             builder.Services.AddAuthorization();
 
-            builder.Services.AddIdentityApiEndpoints<User>()
-                .AddRoles<IdentityRole<int>>()
-                .AddEntityFrameworkStores<StockMarketDbContext>();
+            //builder.Services.AddIdentityCore<User>()
+            //    .AddRoles<IdentityRole<int>>()
+            //    .AddEntityFrameworkStores<StockMarketDbContext>();
             //.AddDefaultTokenProviders();
-
+            builder.Services.AddIdentity<User, IdentityRole<int>>()
+                .AddEntityFrameworkStores<StockMarketDbContext>()
+                .AddDefaultTokenProviders();
 
 
             var app = builder.Build();
