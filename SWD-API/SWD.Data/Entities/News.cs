@@ -11,7 +11,8 @@ public partial class News
     public int NewsId { get; set; }
     [ForeignKey("User")]
     public int? StaffId { get; set; }
-
+    
+    public string? Title { get; set; }
     public string? Content { get; set; }
 
     public string? Type { get; set; }

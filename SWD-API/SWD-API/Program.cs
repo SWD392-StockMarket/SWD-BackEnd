@@ -39,8 +39,7 @@ namespace SWD_API
                     Scheme = "Bearer"
                 });
             });
-         
-
+            
 
 
             //identity autho,authen
@@ -83,20 +82,38 @@ namespace SWD_API
 
 
             var app = builder.Build();
-
             
             app.UseSwagger();
             app.UseSwaggerUI();
             
+            app.UseCors(x => 
+                x.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+            );
+
+            
+            app.Use(async (context, next) =>
+            {
+                if (context.Request.Method == "OPTIONS")
+                {
+                    context.Response.StatusCode = 200;
+                    return;
+                }
+                await next();
+            });
+
 
             app.UseHttpsRedirection();
-            app.MapGroup("api/identity").MapIdentityApi<User>();
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.MapGroup("api/identity").MapIdentityApi<User>();
             app.MapControllers();
 
             app.Run();
+            
+
         }
     }
 }

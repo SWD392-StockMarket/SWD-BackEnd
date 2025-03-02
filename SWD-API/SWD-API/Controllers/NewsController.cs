@@ -110,7 +110,7 @@ namespace SWD_API.Controllers
                 var result = await _newsService.DeleteNewsAsync(id);
                 if (result)
                     return NoContent();
-
+        
                 return NotFound(new { Message = $"News with ID {id} not found." });
             }
             catch (Exception ex)

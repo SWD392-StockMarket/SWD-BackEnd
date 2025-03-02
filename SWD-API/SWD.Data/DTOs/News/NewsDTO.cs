@@ -10,6 +10,8 @@ namespace SWD.Data.DTOs.News
     {
         public int NewsId { get; set; }
         public int? StaffId { get; set; }
+        
+        public string? Title { get; set; }
         public string? Content { get; set; }
         public string? Type { get; set; }
         public DateTime? CreatedDate { get; set; }
