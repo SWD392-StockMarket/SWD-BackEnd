@@ -23,7 +23,6 @@ namespace SWD_API
 
 
             builder.Services.AddControllers();
-                
             
 
             builder.Services.AddDbContext<StockMarketDbContext>(options =>
@@ -84,6 +83,11 @@ namespace SWD_API
 
             var app = builder.Build();
 
+            app.UseCors(x => 
+                x.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+            );
             
             app.UseSwagger();
             app.UseSwaggerUI();
