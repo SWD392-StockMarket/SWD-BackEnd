@@ -15,7 +15,7 @@ namespace SWD_API.Controllers;
         }
 
         // ✅ GET /api/user-stats
-        [Authorize (Roles = "Admin")]
+        // [Authorize (Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetUsersStats()
         {

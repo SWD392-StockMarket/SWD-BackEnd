@@ -20,9 +20,14 @@ public class UsersStatsService: IUsersStatsService
         var newUsers = await _context.Users
             .Where(u => u.CreatedAt >= DateTime.Now.AddDays(-30))
             .CountAsync();
-        var subscriptionUsers = await _context.Users
-            .Where(u => u.SubscriptionStatus == "ACTIVE")
+        
+        
+        var subscriptionUsers = await _context.UserRoles
+            .Where(ur => ur.UserId == 2)
+            .Select(ur => ur.UserId)
+            .Distinct()
             .CountAsync();
+        
         var nonSubscriptionUsers = totalUsers - subscriptionUsers;
         var churnRate = totalUsers == 0
             ? 0

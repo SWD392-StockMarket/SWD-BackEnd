@@ -12,6 +12,8 @@ using SWD.Service;
 using System;
 using System.Reflection;
 using System.Text;
+using SWD.Service.Interface;
+using SWD.Service.Services;
 
 namespace SWD_API
 {
@@ -78,7 +80,8 @@ namespace SWD_API
                 .AddRoles<IdentityRole<int>>()
                 .AddEntityFrameworkStores<StockMarketDbContext>();
             //.AddDefaultTokenProviders();
-
+            
+            builder.Services.AddScoped<IUsersStatsService, UsersStatsService>();
 
 
             var app = builder.Build();
