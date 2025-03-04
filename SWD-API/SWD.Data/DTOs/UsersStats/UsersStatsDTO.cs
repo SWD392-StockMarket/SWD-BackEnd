@@ -7,7 +7,7 @@ public class UsersStatsDTO
     public int SubscriptionUsers { get; set; }
     public int NonSubscriptionUsers { get; set; }
     public string ChurnRate { get; set; }
-    public List<UserGrowthEntry> GrowthData { get; set; } = new List<UserGrowthEntry>();
+    public List<UserGrowthEntry> GrowthData { get; set; } 
 }
 
 public class UserGrowthEntry

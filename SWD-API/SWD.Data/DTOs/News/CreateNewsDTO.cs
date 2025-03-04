@@ -9,11 +9,10 @@ namespace SWD.Data.DTOs.News
     public class CreateNewsDTO
     {
         public int? StaffId { get; set; }
-        
         public string? Title { get; set; }
         public string? Content { get; set; }
         public string? Type { get; set; }
-        public string? Status { get; set; }
+        public string? Status { get; set; } = "Active";
         public string? Url { get; set; }
     }
 

@@ -94,7 +94,6 @@ namespace SWD.Service.Services
             news.Content = dto.Content;
             news.Type = dto.Type;
             news.LastEdited = DateTime.UtcNow;
-            news.Status = dto.Status;
             news.Url = dto.Url;
 
             var updatedNews = await _newsRepository.UpdateAsync(news);

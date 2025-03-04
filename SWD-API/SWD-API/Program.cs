@@ -33,12 +33,35 @@ namespace SWD_API
 
             builder.Services.AddServices().AddRepositories();
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen(c=>
+            // builder.Services.AddSwaggerGen(c=>
+            // {
+            //     c.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme
+            //     {
+            //         Type = SecuritySchemeType.Http,
+            //         Scheme = "Bearer"
+            //     });
+            // });
+            builder.Services.AddSwaggerGen(c =>
             {
                 c.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme
                 {
                     Type = SecuritySchemeType.Http,
-                    Scheme = "Bearer"
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "bearerAuth"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
                 });
             });
             

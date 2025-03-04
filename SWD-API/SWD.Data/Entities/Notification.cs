@@ -12,10 +12,12 @@ public partial class Notification
     public int NotificationId { get; set; }
     [ForeignKey("User")]
     public int? StaffId { get; set; }
-
+    public string? Title { get; set; }
     public string? Content { get; set; }
 
     public string? Navigation { get; set; }
+    
+    public string? Status { get; set; }
 
     public string? Type { get; set; }
 

@@ -67,11 +67,13 @@ namespace SWD.Service.Services
             var notification = new Notification
             {
                 StaffId = dto.StaffId,
+                Title = dto.Title,
                 Content = dto.Content,
                 Navigation = dto.Navigation,
                 Type = dto.Type,
                 CreatedDate = DateTime.UtcNow,
-                UpdatedDate = DateTime.UtcNow
+                // UpdatedDate = DateTime.UtcNow,
+                Status = dto.Status,
             };
 
             await _notificationRepository.AddAsync(notification);
@@ -82,7 +84,8 @@ namespace SWD.Service.Services
         {
             var notification = await _notificationRepository.GetAsync(n => n.NotificationId == id)
                                 ?? throw new KeyNotFoundException("Notification not found.");
-
+            
+            notification.Title = dto.Title ?? notification.Title;
             notification.Content = dto.Content ?? notification.Content;
             notification.Navigation = dto.Navigation ?? notification.Navigation;
             notification.Type = dto.Type ?? notification.Type;
@@ -96,8 +99,9 @@ namespace SWD.Service.Services
         {
             var notification = await _notificationRepository.GetAsync(n => n.NotificationId == id);
             if (notification == null) return false;
-
-            await _notificationRepository.DeleteAsync(notification);
+            
+            notification.Status = "Deleted";
+            await _notificationRepository.UpdateAsync(notification);
             return true;
         }
 
@@ -121,11 +125,13 @@ namespace SWD.Service.Services
             {
                 NotificationId = notification.NotificationId,
                 StaffId = notification.StaffId,
+                Title = notification.Title,
                 Content = notification.Content,
                 Navigation = notification.Navigation,
                 Type = notification.Type,
                 CreatedDate = notification.CreatedDate,
-                UpdatedDate = notification.UpdatedDate
+                UpdatedDate = notification.UpdatedDate,
+                Status = notification.Status
             };
         }
     }
