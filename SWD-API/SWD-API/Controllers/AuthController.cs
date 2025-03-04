@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using SWD.Data.DTOs.Authentication;
 using SWD.Data.Entities;
@@ -12,10 +13,11 @@ namespace SWD_API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
+        
         private readonly UserManager<User> _userManager;
         public AuthController(IAuthService authService, UserManager<User> userManager)
         {
-            _authService = authService; 
+            _authService = authService;
             _userManager = userManager;
         }
         [HttpPost("login")]
@@ -30,5 +32,6 @@ namespace SWD_API.Controllers
             var token = _authService.GenerateToken(user);
             return Ok(new { Token = token });
         }
+        
     }
 }

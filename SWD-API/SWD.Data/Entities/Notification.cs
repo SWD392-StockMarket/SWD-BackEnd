@@ -20,7 +20,7 @@ public partial class Notification
     public string? Status { get; set; }
 
     public string? Type { get; set; }
-
+    
     public DateTime? CreatedDate { get; set; }
 
     public DateTime? UpdatedDate { get; set; }

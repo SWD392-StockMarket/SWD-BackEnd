@@ -25,7 +25,6 @@ namespace SWD_API
 
 
             builder.Services.AddControllers();
-                
             
 
             builder.Services.AddDbContext<StockMarketDbContext>(options =>
@@ -99,15 +98,24 @@ namespace SWD_API
 
             builder.Services.AddAuthorization();
 
-            builder.Services.AddIdentityApiEndpoints<User>()
-                .AddRoles<IdentityRole<int>>()
-                .AddEntityFrameworkStores<StockMarketDbContext>();
+            //builder.Services.AddIdentityCore<User>()
+            //    .AddRoles<IdentityRole<int>>()
+            //    .AddEntityFrameworkStores<StockMarketDbContext>();
             //.AddDefaultTokenProviders();
+
             
             builder.Services.AddScoped<IUsersStatsService, UsersStatsService>();
-
-
+            builder.Services.AddIdentity<User, IdentityRole<int>>()
+                .AddEntityFrameworkStores<StockMarketDbContext>()
+                .AddDefaultTokenProviders();
             var app = builder.Build();
+
+            app.UseCors(x => 
+                x.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+            );
+
             
             app.UseSwagger();
             app.UseSwaggerUI();
