@@ -11,11 +11,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e234fd2-dc57-46bb-b590-4b4e0dc12ad9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/SWD.Service/BackgroundServices/StockStoreDataService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python.Script/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python.Script/script.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SWD.Data/Migrations/20250222080959_init.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SWD.Data/Migrations/20250222080959_init.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SWD.Data/Migrations/StockMarketDbContextModelSnapshot.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD-API/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/SWD-API/appsettings.Development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD-API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/SWD-API/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Data/DTOs/User/UpdateUserDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Data/DTOs/User/UpdateUserDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Data/Entities/Notification.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Data/Entities/Notification.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Data/Migrations/StockMarketDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Data/Migrations/StockMarketDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Service/Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Service/Services/UserService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,14 +41,14 @@
     &quot;assignee&quot;: &quot;GiangNguyen2210&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/SWD392-StockMarket/SWD-BackEnd.git&quot;,
-    &quot;accountId&quot;: &quot;6a07811e-e841-4f4e-a9d0-5b70065c319e&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/SWD392-StockMarket/SWD-BackEnd.git",
+    "accountId": "66cf54aa-cfbe-43e6-acd6-27b55a0562cb"
   }
-}</component>
+}]]></component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://D:/studying/FPT-lessons/SWD-392/SourceCode/SWD-API/SWD.Data/obj/project.assets.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d8d9726f3deb1bbf671f5b791e4dc3e0338219a996f439ad2a69024b825c60/UserManager.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
@@ -59,20 +61,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.SWD.API: https.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;pyexecute&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Launch Settings Profile.SWD.API: https.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Compound.Unnamed">
     <configuration name="Unnamed" type="CompoundRunConfigurationType">
       <toRun name="SWD.API: https" type="LaunchSettings" />
@@ -166,6 +168,7 @@
       <workItem from="1740635097023" duration="535000" />
       <workItem from="1740641243478" duration="3053000" />
       <workItem from="1740644347427" duration="8008000" />
+      <workItem from="1741061739482" duration="2527000" />
     </task>
     <servers />
   </component>
