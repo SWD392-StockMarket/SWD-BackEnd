@@ -12,6 +12,8 @@ using SWD.Service;
 using System;
 using System.Reflection;
 using System.Text;
+using SWD.Service.Interface;
+using SWD.Service.Services;
 
 namespace SWD_API
 {
@@ -30,16 +32,38 @@ namespace SWD_API
 
             builder.Services.AddServices().AddRepositories();
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen(c=>
+            // builder.Services.AddSwaggerGen(c=>
+            // {
+            //     c.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme
+            //     {
+            //         Type = SecuritySchemeType.Http,
+            //         Scheme = "Bearer"
+            //     });
+            // });
+            builder.Services.AddSwaggerGen(c =>
             {
                 c.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme
                 {
                     Type = SecuritySchemeType.Http,
-                    Scheme = "Bearer"
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "bearerAuth"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
                 });
             });
-         
-
+            
 
 
             //identity autho,authen
@@ -74,13 +98,16 @@ namespace SWD_API
 
             builder.Services.AddAuthorization();
 
-            builder.Services.AddIdentityApiEndpoints<User>()
-                .AddRoles<IdentityRole<int>>()
-                .AddEntityFrameworkStores<StockMarketDbContext>();
+            //builder.Services.AddIdentityCore<User>()
+            //    .AddRoles<IdentityRole<int>>()
+            //    .AddEntityFrameworkStores<StockMarketDbContext>();
             //.AddDefaultTokenProviders();
 
-
-
+            
+            builder.Services.AddScoped<IUsersStatsService, UsersStatsService>();
+            builder.Services.AddIdentity<User, IdentityRole<int>>()
+                .AddEntityFrameworkStores<StockMarketDbContext>()
+                .AddDefaultTokenProviders();
             var app = builder.Build();
 
             app.UseCors(x => 
@@ -88,19 +115,39 @@ namespace SWD_API
                     .AllowAnyMethod()
                     .AllowAnyHeader()
             );
+
             
             app.UseSwagger();
             app.UseSwaggerUI();
             
+            app.UseCors(x => 
+                x.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+            );
+
+            
+            app.Use(async (context, next) =>
+            {
+                if (context.Request.Method == "OPTIONS")
+                {
+                    context.Response.StatusCode = 200;
+                    return;
+                }
+                await next();
+            });
+
 
             app.UseHttpsRedirection();
-            app.MapGroup("api/identity").MapIdentityApi<User>();
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.MapGroup("api/identity").MapIdentityApi<User>();
             app.MapControllers();
 
             app.Run();
+            
+
         }
     }
 }

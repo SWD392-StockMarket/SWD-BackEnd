@@ -24,7 +24,9 @@ namespace SWD.Service.Services
             // Apply search filter
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
-                newsList = newsList.Where(n => n.Content.Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
+                newsList = newsList.Where(n =>
+                    (n.Title != null && n.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
+                    (n.Content != null && n.Content.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)));
             }
 
             // Apply sorting
@@ -72,6 +74,7 @@ namespace SWD.Service.Services
             var news = new News
             {
                 StaffId = dto.StaffId,
+                Title = dto.Title,
                 Content = dto.Content,
                 Type = dto.Type,
                 CreatedDate = DateTime.UtcNow,
@@ -87,11 +90,10 @@ namespace SWD.Service.Services
         {
             var news = await _newsRepository.GetAsync(n => n.NewsId == id)
                         ?? throw new KeyNotFoundException("News not found.");
-
+            news.Title = dto.Title;
             news.Content = dto.Content;
             news.Type = dto.Type;
             news.LastEdited = DateTime.UtcNow;
-            news.Status = dto.Status;
             news.Url = dto.Url;
 
             var updatedNews = await _newsRepository.UpdateAsync(news);
@@ -102,10 +104,12 @@ namespace SWD.Service.Services
         {
             var news = await _newsRepository.GetAsync(n => n.NewsId == id);
             if (news == null) return false;
-
-            await _newsRepository.DeleteAsync(news);
+        
+            news.Status = "Deleted";
+            await _newsRepository.UpdateAsync(news);
             return true;
         }
+        
 
         public async Task<List<NewsDTO>> GetNewsByTypeAsync(string type)
         {
@@ -136,6 +140,7 @@ namespace SWD.Service.Services
         {
             return sortColumn?.ToLower() switch
             {
+                "title" => news => news.Title,
                 "content" => news => news.Content,
                 "createddate" => news => news.CreatedDate,
                 "type" => news => news.Type,
@@ -149,6 +154,7 @@ namespace SWD.Service.Services
             {
                 NewsId = news.NewsId,
                 StaffId = news.StaffId,
+                Title = news.Title,
                 Content = news.Content,
                 Type = news.Type,
                 CreatedDate = news.CreatedDate,

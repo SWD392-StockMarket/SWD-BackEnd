@@ -12,8 +12,8 @@ using SWD.Data;
 namespace SWD.Data.Migrations
 {
     [DbContext(typeof(StockMarketDbContext))]
-    [Migration("20250222080959_init")]
-    partial class init
+    [Migration("20250304041826_AddStatusToNotification")]
+    partial class AddStatusToNotification
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -291,6 +291,9 @@ namespace SWD.Data.Migrations
 
                     b.Property<int?>("StaffId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");

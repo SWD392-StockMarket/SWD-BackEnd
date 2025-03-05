@@ -15,6 +15,7 @@ namespace SWD.Repository.Repositories
         public NewsRepository(StockMarketDbContext context) : base(context)
         {
             _dbcontext = context;
+            
         }
     }
 }
