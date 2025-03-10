@@ -4,7 +4,8 @@ using SWD.Service.Interface;
 
 namespace SWD_API.Controllers
 {
-    [Route("api/company")]
+    [Route("api/v{version:apiVersion}/companies")]
+    [ApiVersion("1.0")]
     [ApiController]
     public class CompanyController : ControllerBase
     {

@@ -14,6 +14,8 @@ using System.Reflection;
 using System.Text;
 using SWD.Service.Interface;
 using SWD.Service.Services;
+using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SWD_API
 {
@@ -62,9 +64,18 @@ namespace SWD_API
                         Array.Empty<string>()
                     }
                 });
-            });
-            
+                var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFilename);
+                c.IncludeXmlComments(xmlPath);
 
+            });
+            builder.Services.AddApiVersioning(options =>
+            {
+                options.ReportApiVersions = true;
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.DefaultApiVersion = new ApiVersion(1, 0);
+                options.ApiVersionReader = new UrlSegmentApiVersionReader();
+            });
 
             //identity autho,authen
             var jwtSecret = builder.Configuration["JWT:Key"]; 

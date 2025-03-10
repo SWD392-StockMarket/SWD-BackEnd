@@ -5,7 +5,8 @@ using SWD.Service.Interface;
 
 namespace SWD_API.Controllers
 {
-    [Route("api/watchlists")]
+    [Route("api/v{version:apiVersion}/watchlists")]
+    [ApiVersion("1.0")]
     [ApiController]
     public class WatchListController : ControllerBase
     {
