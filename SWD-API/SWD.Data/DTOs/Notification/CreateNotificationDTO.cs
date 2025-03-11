@@ -13,7 +13,9 @@ namespace SWD.Data.DTOs.Notification
         public string Content { get; set; } = string.Empty;
         public string? Navigation { get; set; }
         public string? Type { get; set; }
-        public string? Status { get; set; } = "Active";
+        public string? Status { get; set; } 
+        
+        public DateTime? ScheduledTime { get; set; }
     }
 
 }

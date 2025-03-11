@@ -5,7 +5,7 @@
 namespace SWD.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class DbInit : Migration
+    public partial class NotificationaddScheduleTime : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

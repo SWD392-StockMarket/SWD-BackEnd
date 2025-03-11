@@ -17,6 +17,8 @@ namespace SWD.Data.DTOs.Notification
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public string? Status { get; set; }
+        
+        public DateTime? ScheduledTime { get; set; }
     }
 
 }

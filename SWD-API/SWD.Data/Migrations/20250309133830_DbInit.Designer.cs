@@ -12,7 +12,7 @@ using SWD.Data;
 namespace SWD.Data.Migrations
 {
     [DbContext(typeof(StockMarketDbContext))]
-    [Migration("20250304131348_DbInit")]
+    [Migration("20250309133830_DbInit")]
     partial class DbInit
     {
         /// <inheritdoc />
@@ -291,6 +291,9 @@ namespace SWD.Data.Migrations
 
                     b.Property<string>("Navigation")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ScheduledTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("StaffId")
                         .HasColumnType("int");

@@ -24,6 +24,8 @@ public partial class Notification
     public DateTime? CreatedDate { get; set; }
 
     public DateTime? UpdatedDate { get; set; }
+    
+    public DateTime? ScheduledTime { get; set; }
     [JsonIgnore]
     public virtual ICollection<NotificationUser> NotificationUsers { get; set; } = new List<NotificationUser>();
 
