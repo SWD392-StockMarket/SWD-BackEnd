@@ -17,6 +17,8 @@ using SWD.Service.Interface;
 using SWD.Service.Services;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
+using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SWD_API
 {
@@ -95,9 +97,18 @@ namespace SWD_API
                         Array.Empty<string>()
                     }
                 });
-            });
-            
+                var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFilename);
+                c.IncludeXmlComments(xmlPath);
 
+            });
+            builder.Services.AddApiVersioning(options =>
+            {
+                options.ReportApiVersions = true;
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.DefaultApiVersion = new ApiVersion(1, 0);
+                options.ApiVersionReader = new UrlSegmentApiVersionReader();
+            });
 
             //identity autho,authen
             var jwtSecret = builder.Configuration["JWT:Key"]; 
@@ -128,6 +139,7 @@ namespace SWD_API
             });
             builder.Services.AddHostedService<NotificationBackgroundService>();
 
+            
 
             builder.Services.AddAuthorization();
 
@@ -153,10 +165,17 @@ namespace SWD_API
                     .AllowAnyHeader()
             );
 
+            
             app.UseSwagger();
             app.UseSwaggerUI();
             
+            app.UseCors(x => 
+                x.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+            );
 
+            
             app.Use(async (context, next) =>
             {
                 if (context.Request.Method == "OPTIONS")
@@ -167,6 +186,7 @@ namespace SWD_API
                 await next();
             });
 
+
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
@@ -175,6 +195,8 @@ namespace SWD_API
             app.MapControllers();
 
             app.Run();
+            
+
         }
     }
 }

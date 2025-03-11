@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace SWD_API.Controllers
 {
-    [Route("api/notification")]
+    [Route("api/v{version:apiVersion}/notifications")]
+    [ApiVersion("1.0")]
     [ApiController]
     public class NotificationController : ControllerBase
     {
