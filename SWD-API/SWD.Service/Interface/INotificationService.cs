@@ -1,10 +1,12 @@
 ﻿using SWD.Data.DTOs.Notification;
 using SWD.Data.DTOs;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SWD.Data.Entities;
 
 namespace SWD.Service.Interface
 {
@@ -20,5 +22,6 @@ namespace SWD.Service.Interface
         Task<NotificationDTO> UpdateNotificationAsync(int id, UpdateNotificationDTO dto);
 
         Task<bool> DeleteNotificationAsync(int id);
+        Task SendNotificationAsync(Notification notification);
     }
 }

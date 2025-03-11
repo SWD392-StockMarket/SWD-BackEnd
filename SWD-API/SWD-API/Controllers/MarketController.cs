@@ -5,7 +5,8 @@ using SWD.Service.Interface;
 
 namespace SWD_API.Controllers
 {
-    [Route("api/market")]
+    [Route("api/v{version:apiVersion}/markets")]
+    [ApiVersion("1.0")]
     [ApiController]
     public class MarketController : ControllerBase
     {

@@ -12,8 +12,13 @@ using SWD.Data;
 namespace SWD.Data.Migrations
 {
     [DbContext(typeof(StockMarketDbContext))]
-    [Migration("20250304025027_DbInitial")]
-    partial class DbInitial
+<<<<<<<< HEAD:SWD-API/SWD.Data/Migrations/20250309133830_DbInit.Designer.cs
+    [Migration("20250309133830_DbInit")]
+    partial class DbInit
+========
+    [Migration("20250307133013_init")]
+    partial class init
+>>>>>>>> e705b579aaf4aa66bf70c06cfd6177ff03881082:SWD-API/SWD.Data/Migrations/20250307133013_init.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -291,6 +296,9 @@ namespace SWD.Data.Migrations
 
                     b.Property<string>("Navigation")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ScheduledTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("StaffId")
                         .HasColumnType("int");

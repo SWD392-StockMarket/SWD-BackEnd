@@ -289,6 +289,9 @@ namespace SWD.Data.Migrations
                     b.Property<string>("Navigation")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("ScheduledTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<int?>("StaffId")
                         .HasColumnType("int");
 

@@ -1,19 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace SWD.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AddStatusToNotification : Migration
+    public partial class DbInit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Status",
+            migrationBuilder.AddColumn<DateTime>(
+                name: "ScheduledTime",
                 table: "Notifications",
-                type: "nvarchar(max)",
+                type: "datetime2",
                 nullable: true);
         }
 
@@ -21,7 +22,7 @@ namespace SWD.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Status",
+                name: "ScheduledTime",
                 table: "Notifications");
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using FirebaseAdmin.Messaging;
 using SWD.Data.Entities;
 using SWD.Data.DTOs;
 using SWD.Data.DTOs.Notification;
@@ -6,6 +7,9 @@ using SWD.Repository.Interface;
 using SWD.Service.Interface;
 using System.Linq;
 
+// Alias to avoid ambiguity
+using SWDNotification = SWD.Data.Entities.Notification;
+using FCMNotification = FirebaseAdmin.Messaging.Notification;
 
 namespace SWD.Service.Services
 {
@@ -62,21 +66,35 @@ namespace SWD.Service.Services
             return MapToDTO(notification);
         }
 
+         
         public async Task<NotificationDTO> CreateNotificationAsync(CreateNotificationDTO dto)
         {
-            var notification = new Notification
+            
+            var notification = new SWDNotification
             {
                 StaffId = dto.StaffId,
                 Title = dto.Title,
-                Content = dto.Content,
+                Content = dto.Content ?? string.Empty,
                 Navigation = dto.Navigation,
                 Type = dto.Type,
                 CreatedDate = DateTime.UtcNow,
-                // UpdatedDate = DateTime.UtcNow,
-                Status = dto.Status,
+                ScheduledTime = dto.ScheduledTime,
+                Status = dto.ScheduledTime.HasValue ? "Pending" : "Active"
             };
+            
+            if (notification.Status == "Active" && !notification.ScheduledTime.HasValue)
+            {
+                notification.ScheduledTime = DateTime.UtcNow;
+            }
 
             await _notificationRepository.AddAsync(notification);
+
+            // Send immediately if Active
+            if (notification.Status == "Active")
+            {
+                await SendNotificationAsync(notification);
+            }
+
             return MapToDTO(notification);
         }
 
@@ -85,11 +103,43 @@ namespace SWD.Service.Services
             var notification = await _notificationRepository.GetAsync(n => n.NotificationId == id)
                                 ?? throw new KeyNotFoundException("Notification not found.");
             
+            // Store the original status for comparison
+            var originalStatus = notification.Status;
+            
             notification.Title = dto.Title ?? notification.Title;
             notification.Content = dto.Content ?? notification.Content;
             notification.Navigation = dto.Navigation ?? notification.Navigation;
             notification.Type = dto.Type ?? notification.Type;
             notification.UpdatedDate = DateTime.UtcNow;
+            notification.Status = dto.Status ?? notification.Status;
+            notification.ScheduledTime = dto.ScheduledTime ?? notification.ScheduledTime;
+            
+            // Handle status transition logic
+            if (notification.Status == "Active")
+            {
+                // If status is Active and it wasn't before, send immediately
+                if (originalStatus != "Active")
+                {
+                    await SendNotificationAsync(notification);
+                    
+                    // Set ScheduledTime to now if it was null (for consistency with Create)
+                    // if (!notification.ScheduledTime.HasValue)
+                    // {
+                        notification.ScheduledTime = DateTime.UtcNow;
+                    // }
+                }
+                // If ScheduledTime is still set but status is Active, clear it (optional, based on your logic)
+                else if (notification.ScheduledTime.HasValue && dto.ScheduledTime == null)
+                {
+                    notification.ScheduledTime = DateTime.UtcNow; // Or null, depending on your preference
+                    await SendNotificationAsync(notification);
+                }
+            }
+            else if (notification.Status == "Pending" && notification.ScheduledTime == null)
+            {
+                // If status is Pending but no ScheduledTime, it’s invalid—throw or set a default
+                throw new ArgumentException("Pending notifications must have a ScheduledTime.");
+            }
 
             var updatedNotification = await _notificationRepository.UpdateAsync(notification);
             return MapToDTO(updatedNotification);
@@ -99,15 +149,13 @@ namespace SWD.Service.Services
         {
             var notification = await _notificationRepository.GetAsync(n => n.NotificationId == id);
             if (notification == null) return false;
-            
+
             notification.Status = "Deleted";
             await _notificationRepository.UpdateAsync(notification);
             return true;
         }
 
-        
-
-        private static Func<Notification, object> GetSortProperty(string SortColumn)
+        private static Func<SWDNotification, object> GetSortProperty(string SortColumn)
         {
             return SortColumn?.ToLower() switch
             {
@@ -115,11 +163,36 @@ namespace SWD.Service.Services
                 "createddate" => n => n.CreatedDate,
                 "updateddate" => n => n.UpdatedDate,
                 _ => n => n.NotificationId
-
             };
         }
 
-        private static NotificationDTO MapToDTO(Notification notification)
+        public async Task SendNotificationAsync(SWDNotification notification)
+        {
+            try
+            {
+                var message = new Message
+                {
+                    Notification = new FCMNotification
+                    {
+                        Title = notification.Title,
+                        Body = notification.Content
+                    },
+                    Topic = "users"
+                };
+                string response = await FirebaseMessaging.DefaultInstance.SendAsync(message);
+                Console.WriteLine($"FCM Notification Sent: {response} at {DateTime.UtcNow}");
+                notification.Status = "Active";
+                await _notificationRepository.UpdateAsync(notification);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error sending notification: {ex.Message} at {DateTime.UtcNow}");
+                notification.Status = "Failed";
+                await _notificationRepository.UpdateAsync(notification);
+            }
+        }
+
+        private static NotificationDTO MapToDTO(SWDNotification notification)
         {
             return new NotificationDTO
             {
@@ -131,6 +204,7 @@ namespace SWD.Service.Services
                 Type = notification.Type,
                 CreatedDate = notification.CreatedDate,
                 UpdatedDate = notification.UpdatedDate,
+                ScheduledTime = notification.ScheduledTime,
                 Status = notification.Status
             };
         }

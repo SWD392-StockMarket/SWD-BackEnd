@@ -116,7 +116,7 @@ namespace SWD.Service.Services
             var user = await _userRepository.GetAsync(u => u.Id == id);
             if (user == null) return false;
             
-            user.Status = "Inactive";
+            user.Status = "Deleted";
             await _userRepository.UpdateAsync(user);
             return true;
         }

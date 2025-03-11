@@ -12,8 +12,8 @@ using SWD.Data;
 namespace SWD.Data.Migrations
 {
     [DbContext(typeof(StockMarketDbContext))]
-    [Migration("20250304041826_AddStatusToNotification")]
-    partial class AddStatusToNotification
+    [Migration("20250311094049_Notification add Schedule Time")]
+    partial class NotificationaddScheduleTime
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -259,6 +259,9 @@ namespace SWD.Data.Migrations
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
@@ -289,10 +292,16 @@ namespace SWD.Data.Migrations
                     b.Property<string>("Navigation")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("ScheduledTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<int?>("StaffId")
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type")

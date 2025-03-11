@@ -8,7 +8,8 @@ using SWD.Service.Interface;
 
 namespace SWD_API.Controllers
 {
-    [Route("api/auth")]
+    [Route("api/v{version:apiVersion}/auth")]
+    [ApiVersion("1.0")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -28,7 +29,12 @@ namespace SWD_API.Controllers
             {
                 return Unauthorized("Invalid credentials.");
             }
-
+            // Check if the account is soft-deleted
+            if (user.Status == "Deleted") // Adjust this condition based on your actual property
+            {
+                return Unauthorized("Your account has been deleted. Please contact the admin!");
+            }
+            
             var token = _authService.GenerateToken(user);
             return Ok(new { Token = token });
         }
