@@ -19,6 +19,9 @@ namespace SWD.Service
             service.AddTransient<INotificationService, NotificationService>();
             service.AddTransient<IUserService, UserService>();
             service.AddTransient<IWatchListService, WatchListService>();
+            service.AddTransient<IStockHistoryService, StockHistoryService>();
+            service.AddTransient<ISessionService, SessionService>();
+            service.AddTransient<INotificationUserService, NotificationUserService>();
             service.AddTransient<IEmailSender<User>, SmtpEmailSender>();
             //service.AddTransient<IRoomService, RoomService>();
             return service;

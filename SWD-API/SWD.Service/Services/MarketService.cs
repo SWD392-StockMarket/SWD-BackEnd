@@ -15,7 +15,7 @@ namespace SWD.Service.Services
     {
         private readonly IMarketRepository _marketRepository;
 
-        public MarketService(IMarketRepository marketRepository, IStockRopository stockRepository)
+        public MarketService(IMarketRepository marketRepository)
         {
             _marketRepository = marketRepository;
         }
