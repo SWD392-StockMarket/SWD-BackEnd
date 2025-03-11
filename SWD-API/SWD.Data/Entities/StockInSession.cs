@@ -1,6 +1,7 @@
 ﻿
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace SWD.Data.Entities;
 
@@ -23,8 +24,8 @@ public partial class StockInSession
     public decimal? HighPrice { get; set; }
 
     public decimal? LowPrice { get; set; }
-
+    [JsonIgnore]
     public virtual Session? Session { get; set; }
-
+    [JsonIgnore]
     public virtual Stock? Stock { get; set; }
 }
