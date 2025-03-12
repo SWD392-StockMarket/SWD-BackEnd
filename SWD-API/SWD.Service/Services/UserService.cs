@@ -78,6 +78,7 @@ namespace SWD.Service.Services
                 Email = dto.Email,
                 Status = "Active",
                 SubscriptionStatus = dto.SubscriptionStatus,
+                PhoneNumber = dto.PhoneNumber,
                 CreatedAt = DateTime.UtcNow.AddHours(7),
                 LastEdited = DateTime.UtcNow.AddHours(7)
             };
@@ -105,6 +106,7 @@ namespace SWD.Service.Services
             user.Email = dto.Email ?? user.Email;
             user.UserName = dto.UserName ?? user.UserName;
             user.SubscriptionStatus = dto.SubscriptionStatus ?? user.SubscriptionStatus;
+            user.PhoneNumber = dto.PhoneNumber ?? user.PhoneNumber;
             user.LastEdited = DateTime.UtcNow.AddHours(7);
             
             user.NormalizedUserName = user.UserName?.ToUpper();
@@ -145,6 +147,7 @@ namespace SWD.Service.Services
                 Email = user.Email,
                 Status = user.Status,
                 SubscriptionStatus = user.SubscriptionStatus,
+                PhoneNumber = user.PhoneNumber,
                 CreatedAt = user.CreatedAt,
                 LastEdited = user.LastEdited
             };

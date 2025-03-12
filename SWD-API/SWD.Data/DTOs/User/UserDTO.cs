@@ -11,5 +11,7 @@ namespace SWD.Data.DTOs.User
         public DateTime? CreatedAt { get; set; }
         public DateTime? LastEdited { get; set; }
         public string? SubscriptionStatus { get; set; }
+        public string? PhoneNumber { get; set; }
+
     }
 }
