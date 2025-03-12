@@ -317,23 +317,17 @@ namespace SWD.Data.Migrations
             modelBuilder.Entity("SWD.Data.Entities.NotificationUser", b =>
                 {
                     b.Property<int>("NotificationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NotificationId"));
-
-                    b.Property<int>("NotificationId1")
-                        .HasColumnType("int");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("NotificationId");
-
-                    b.HasIndex("NotificationId1");
+                    b.HasKey("NotificationId", "UserId");
 
                     b.HasIndex("UserId");
 
@@ -669,7 +663,7 @@ namespace SWD.Data.Migrations
                 {
                     b.HasOne("SWD.Data.Entities.Notification", "Notification")
                         .WithMany("NotificationUsers")
-                        .HasForeignKey("NotificationId1")
+                        .HasForeignKey("NotificationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

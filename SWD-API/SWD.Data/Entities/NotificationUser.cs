@@ -7,8 +7,11 @@ namespace SWD.Data.Entities;
 public partial class NotificationUser
 {
     [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [Column(Order = 1)]
+    [ForeignKey("Notification")]
     public int NotificationId { get; set; }
+    [Key]
+    [Column(Order = 2)]
     [ForeignKey("User")]
     public int UserId { get; set; }
 

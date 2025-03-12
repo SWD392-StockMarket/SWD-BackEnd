@@ -18,13 +18,13 @@ public partial class StockMarketDbContext : IdentityDbContext<User, IdentityRole
     {
     }
     
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        if (!optionsBuilder.IsConfigured)
-        {
-            optionsBuilder.UseSqlServer("Server=(local);Database=StockMarketDB;User Id=sa;Password=Abc@1234;Trusted_Connection=True;TrustServerCertificate=True");
-        }
-    }
+    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //{
+    //    if (!optionsBuilder.IsConfigured)
+    //    {
+    //        optionsBuilder.UseSqlServer("Server=(local);Database=StockMarketDB;User Id=sa;Password=Abc@1234;Trusted_Connection=True;TrustServerCertificate=True");
+    //    }
+    //}
 
 
     public virtual DbSet<Company> Companies { get; set; }
@@ -58,6 +58,21 @@ public partial class StockMarketDbContext : IdentityDbContext<User, IdentityRole
             new IdentityRole<int> { Id = 3, Name = "MARKETANALIZER", NormalizedName = "MARKETANALIZER" },
             new IdentityRole<int> { Id = 4, Name = "USER", NormalizedName = "USER" }
         );
+        modelBuilder.Entity<NotificationUser>()
+       .HasKey(nu => new { nu.NotificationId, nu.UserId });
+
+        // Define relationships
+        modelBuilder.Entity<NotificationUser>()
+            .HasOne(nu => nu.Notification)
+            .WithMany(n => n.NotificationUsers)
+            .HasForeignKey(nu => nu.NotificationId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<NotificationUser>()
+            .HasOne(nu => nu.User)
+            .WithMany(u => u.NotificationUsers)
+            .HasForeignKey(nu => nu.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         base.OnModelCreating(modelBuilder);
     }

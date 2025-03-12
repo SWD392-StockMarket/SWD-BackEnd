@@ -270,7 +270,8 @@ namespace SWD.Data.Migrations
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ScheduledTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -334,15 +335,13 @@ namespace SWD.Data.Migrations
                 name: "NotificationUsers",
                 columns: table => new
                 {
-                    NotificationId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NotificationId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NotificationId1 = table.Column<int>(type: "int", nullable: false)
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_NotificationUsers", x => x.NotificationId);
+                    table.PrimaryKey("PK_NotificationUsers", x => new { x.NotificationId, x.UserId });
                     table.ForeignKey(
                         name: "FK_NotificationUsers_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -350,8 +349,8 @@ namespace SWD.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_NotificationUsers_Notifications_NotificationId1",
-                        column: x => x.NotificationId1,
+                        name: "FK_NotificationUsers_Notifications_NotificationId",
+                        column: x => x.NotificationId,
                         principalTable: "Notifications",
                         principalColumn: "NotificationId",
                         onDelete: ReferentialAction.Cascade);
@@ -469,11 +468,6 @@ namespace SWD.Data.Migrations
                 name: "IX_Notifications_StaffId",
                 table: "Notifications",
                 column: "StaffId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_NotificationUsers_NotificationId1",
-                table: "NotificationUsers",
-                column: "NotificationId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_NotificationUsers_UserId",
