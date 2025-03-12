@@ -12,11 +12,13 @@ namespace SWD.Service.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly UserManager<User> _userManager;
+        private readonly IAuthService _authService;
         
-        public UserService(IUserRepository userRepository, UserManager<User> userManager)
+        public UserService(IUserRepository userRepository, UserManager<User> userManager, IAuthService authService)
         {
             _userRepository = userRepository;
             _userManager = userManager;
+            _authService = authService;
         }
 
         public async Task<PageListResponse<UserDTO>> GetUsersAsync(string? searchTerm, string? sortColumn, string? sortOrder, int page = 1, int pageSize = 20)
@@ -95,6 +97,43 @@ namespace SWD.Service.Services
             await _userManager.AddToRoleAsync(user, "MARKETANALIZER");
 
             return MapToDTO(user);
+        }
+        
+        public async Task<RegisterResponseDTO> RegisterUserAsync(RegisterUserDTO dto)
+        {
+            var existingUser = await _userManager.FindByEmailAsync(dto.Email);
+            if (existingUser != null)
+            {
+                throw new Exception("Email is already in use.");
+            }
+            var user = new User
+            {
+                UserName = dto.UserName,
+                Email = dto.Email,
+                Status = "Active",
+                PhoneNumber = dto.PhoneNumber,
+                CreatedAt = DateTime.UtcNow.AddHours(7),
+                LastEdited = DateTime.UtcNow.AddHours(7)
+            };
+
+            // await _userRepository.AddAsync(user);
+            // Hash password và tạo user
+            var result = await _userManager.CreateAsync(user, dto.Password);
+            if (!result.Succeeded)
+            {
+                throw new Exception(string.Join("; ", result.Errors.Select(e => e.Description)));
+            }
+
+            // Gán role cho user (nếu có)
+            await _userManager.AddToRoleAsync(user, "USER");
+
+            var token = _authService.GenerateToken(user);    
+            return new RegisterResponseDTO
+            {
+                User = MapToDTO(user),
+                Token = await token,
+                UserId = user.Id
+            };
         }
 
         public async Task<UserDTO> UpdateUserAsync(int id, UpdateUserDTO dto)

@@ -74,6 +74,28 @@ namespace SWD_API.Controllers
                 return StatusCode(500, new { Message = "An error occurred while creating the user.", Error = ex.Message });
             }
         }
+        
+        [HttpPost("register")]
+        public async Task<IActionResult> RegisterUser([FromBody] RegisterUserDTO dto)
+        {
+            if (dto == null)
+                return BadRequest(new { Message = "Invalid user data." });
+
+            try
+            {
+                var response = await _userService.RegisterUserAsync(dto);
+                return Ok(new
+                {
+                    User = response.User,
+                    Token = response.Token,
+                    userId = response.UserId
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while register the user.", Error = ex.Message });
+            }
+        }
 
         /// <summary>
         /// Update an existing user
