@@ -456,6 +456,9 @@ namespace SWD.Data.Migrations
                     b.Property<int?>("StockId")
                         .HasColumnType("int");
 
+                    b.Property<decimal?>("Volume")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("StockInSessionId");
 
                     b.HasIndex("SessionId");

@@ -12,8 +12,8 @@ using SWD.Data;
 namespace SWD.Data.Migrations
 {
     [DbContext(typeof(StockMarketDbContext))]
-    [Migration("20250311131541_init")]
-    partial class init
+    [Migration("20250312204632_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -458,6 +458,9 @@ namespace SWD.Data.Migrations
 
                     b.Property<int?>("StockId")
                         .HasColumnType("int");
+
+                    b.Property<decimal?>("Volume")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("StockInSessionId");
 

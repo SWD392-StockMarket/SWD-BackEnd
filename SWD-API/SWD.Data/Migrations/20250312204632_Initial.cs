@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SWD.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -368,7 +368,8 @@ namespace SWD.Data.Migrations
                     OpenPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     ClosePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     HighPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    LowPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true)
+                    LowPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Volume = table.Column<decimal>(type: "decimal(18,2)", nullable: true)
                 },
                 constraints: table =>
                 {
