@@ -78,8 +78,8 @@ namespace SWD.Service.Services
                 Email = dto.Email,
                 Status = "Active",
                 SubscriptionStatus = dto.SubscriptionStatus,
-                CreatedAt = DateTime.UtcNow,
-                LastEdited = DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow.AddHours(7),
+                LastEdited = DateTime.UtcNow.AddHours(7)
             };
 
             // await _userRepository.AddAsync(user);
@@ -105,8 +105,11 @@ namespace SWD.Service.Services
             user.Email = dto.Email ?? user.Email;
             user.UserName = dto.UserName ?? user.UserName;
             user.SubscriptionStatus = dto.SubscriptionStatus ?? user.SubscriptionStatus;
-            user.LastEdited = DateTime.UtcNow;
-
+            user.LastEdited = DateTime.UtcNow.AddHours(7);
+            
+            user.NormalizedUserName = user.UserName?.ToUpper();
+            user.NormalizedEmail = user.Email?.ToUpper();
+            
             var updatedUser = await _userRepository.UpdateAsync(user);
             return MapToDTO(updatedUser);
         }

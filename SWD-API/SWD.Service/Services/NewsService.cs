@@ -77,7 +77,7 @@ namespace SWD.Service.Services
                 Title = dto.Title,
                 Content = dto.Content,
                 Type = dto.Type,
-                CreatedDate = DateTime.UtcNow,
+                CreatedDate = DateTime.UtcNow.AddHours(7),
                 Status = dto.Status,
                 Url = dto.Url
             };
@@ -93,7 +93,7 @@ namespace SWD.Service.Services
             news.Title = dto.Title;
             news.Content = dto.Content;
             news.Type = dto.Type;
-            news.LastEdited = DateTime.UtcNow;
+            news.LastEdited = DateTime.UtcNow.AddHours(7);
             news.Url = dto.Url;
 
             var updatedNews = await _newsRepository.UpdateAsync(news);

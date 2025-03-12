@@ -77,14 +77,14 @@ namespace SWD.Service.Services
                 Content = dto.Content ?? string.Empty,
                 Navigation = dto.Navigation,
                 Type = dto.Type,
-                CreatedDate = DateTime.UtcNow,
+                CreatedDate = DateTime.UtcNow.AddHours(7),
                 ScheduledTime = dto.ScheduledTime,
                 Status = dto.ScheduledTime.HasValue ? "Pending" : "Active"
             };
             
             if (notification.Status == "Active" && !notification.ScheduledTime.HasValue)
             {
-                notification.ScheduledTime = DateTime.UtcNow;
+                notification.ScheduledTime = DateTime.UtcNow.AddHours(7);
             }
 
             await _notificationRepository.AddAsync(notification);
@@ -110,7 +110,7 @@ namespace SWD.Service.Services
             notification.Content = dto.Content ?? notification.Content;
             notification.Navigation = dto.Navigation ?? notification.Navigation;
             notification.Type = dto.Type ?? notification.Type;
-            notification.UpdatedDate = DateTime.UtcNow;
+            notification.UpdatedDate = DateTime.UtcNow.AddHours(7);
             notification.Status = dto.Status ?? notification.Status;
             notification.ScheduledTime = dto.ScheduledTime ?? notification.ScheduledTime;
             
@@ -125,13 +125,13 @@ namespace SWD.Service.Services
                     // Set ScheduledTime to now if it was null (for consistency with Create)
                     // if (!notification.ScheduledTime.HasValue)
                     // {
-                        notification.ScheduledTime = DateTime.UtcNow;
+                        notification.ScheduledTime = DateTime.UtcNow.AddHours(7);
                     // }
                 }
                 // If ScheduledTime is still set but status is Active, clear it (optional, based on your logic)
                 else if (notification.ScheduledTime.HasValue && dto.ScheduledTime == null)
                 {
-                    notification.ScheduledTime = DateTime.UtcNow; // Or null, depending on your preference
+                    notification.ScheduledTime = DateTime.UtcNow.AddHours(7); // Or null, depending on your preference
                     await SendNotificationAsync(notification);
                 }
             }
@@ -180,13 +180,13 @@ namespace SWD.Service.Services
                     Topic = "users"
                 };
                 string response = await FirebaseMessaging.DefaultInstance.SendAsync(message);
-                Console.WriteLine($"FCM Notification Sent: {response} at {DateTime.UtcNow}");
+                Console.WriteLine($"FCM Notification Sent: {response} at {DateTime.UtcNow.AddHours(7)}");
                 notification.Status = "Active";
                 await _notificationRepository.UpdateAsync(notification);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error sending notification: {ex.Message} at {DateTime.UtcNow}");
+                Console.WriteLine($"Error sending notification: {ex.Message} at {DateTime.UtcNow.AddHours(7)}");
                 notification.Status = "Failed";
                 await _notificationRepository.UpdateAsync(notification);
             }
