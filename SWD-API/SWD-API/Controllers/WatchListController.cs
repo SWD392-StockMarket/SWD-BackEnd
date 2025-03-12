@@ -138,5 +138,18 @@ namespace SWD_API.Controllers
             }
         }
         
+        [HttpPut("stock/{watchListId}/{stockId}")]
+        public async Task<IActionResult> AddStockToWatchList(int watchListId, int stockId)
+        {
+            try
+            {
+                var result = await _watchListService.AddStockToWatchListAsync(watchListId, stockId);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while deleting the watchlist.", Error = ex.Message });
+            }
+        }
     }
 }
