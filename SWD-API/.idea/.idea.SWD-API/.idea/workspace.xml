@@ -11,10 +11,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e234fd2-dc57-46bb-b590-4b4e0dc12ad9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SWD-API/Controllers/WatchListController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD-API/Controllers/WatchListController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SWD.Service/Interface/IWatchListService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Service/Interface/IWatchListService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SWD.Service/Services/WatchListService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Service/Services/WatchListService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
