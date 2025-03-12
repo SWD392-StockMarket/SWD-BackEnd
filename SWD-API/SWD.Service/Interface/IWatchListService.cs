@@ -2,6 +2,7 @@
 
 using SWD.Data.DTOs.WatchLists;
 using SWD.Data.DTOs;
+using SWD.Data.DTOs.Stock;
 
 namespace SWD.Service.Interface
 {
@@ -17,5 +18,7 @@ namespace SWD.Service.Interface
         Task<WatchListDTO> UpdateWatchListAsync(int id, UpdateWatchListDTO dto);
 
         Task<bool> DeleteWatchListAsync(int id);
+        
+        Task<WatchListDTO> AddStockToWatchListAsync(int watchListId, int stockId);
     }
 }
