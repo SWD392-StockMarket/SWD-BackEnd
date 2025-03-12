@@ -36,7 +36,11 @@ namespace SWD_API.Controllers
             }
             
             var token = _authService.GenerateToken(user);
-            return Ok(new { Token = token });
+            return Ok(new
+            {
+                Token = token ,
+                userId = user.Id
+            });
         }
         
     }

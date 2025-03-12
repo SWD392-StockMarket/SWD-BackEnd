@@ -25,6 +25,11 @@ namespace SWD.Repository.Repositories
         {
             await _db.AddAsync(entity);
             await _db.SaveChangesAsync();
+            using (var transaction = _db.Database.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
+            {
+                // Your insert operation
+                await transaction.CommitAsync();
+            }
             return entity;
         }
 

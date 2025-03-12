@@ -24,6 +24,22 @@ namespace SWD.Repository.Repositories
             return await _dbcontext.Set<Stock>().AnyAsync(predicate);
         }
 
-        
+        public async Task<IEnumerable<Stock>> GetAllAsyncInclude(Expression<Func<Stock, bool>>? filter = null, string? includeProperties = null)
+        {
+            IQueryable<Stock> query = dbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter).Include(s => s.Company).Include(s => s.Market);
+            }
+            if (includeProperties != null)
+            {
+                foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp.Trim());
+                }
+            }
+
+            return await query.ToListAsync();        }
     }
 }

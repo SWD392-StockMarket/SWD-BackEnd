@@ -13,5 +13,7 @@ namespace SWD.Repository.Interface
     {
         //Task<ICollection<Stock>> GetAllStocksAsync();
         Task<bool> AnyAsync(Expression<Func<Stock, bool>> predicate);
+
+        Task<IEnumerable<Stock>> GetAllAsyncInclude(Expression<Func<Stock, bool>>? filter = null, string? includeProperties = null);
     }
 }

@@ -80,7 +80,7 @@ namespace SWD.Service.Services
 
         public async Task<PageListResponse<StockDTO>> GetStocksAsync(string? searchTerm, string? sortColumn, string? sortOrder, int page = 1, int pageSize = 20)
         {
-            var categories = await _stockRopository.GetAllAsync(includeProperties: "Company,Market,StockInSessions,WatchLists");
+            var categories = await _stockRopository.GetAllAsyncInclude(includeProperties: "Company,Market,StockInSessions,WatchLists");
 
 
             // Apply search filter if searchTerm is provided

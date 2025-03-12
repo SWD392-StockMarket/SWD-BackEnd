@@ -137,5 +137,6 @@ namespace SWD_API.Controllers
                 return StatusCode(500, new { Message = "An error occurred while deleting the watchlist.", Error = ex.Message });
             }
         }
+        
     }
 }
