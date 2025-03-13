@@ -19,6 +19,9 @@ using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.AspNetCore.Mvc;
+// using Newtonsoft.Json;
+using System.Text.Json; 
+using Microsoft.Extensions.Configuration; 
 
 namespace SWD_API
 {
@@ -28,51 +31,46 @@ namespace SWD_API
         {
             var builder = WebApplication.CreateBuilder(args);
             
-            // try
-            // {
-            //     var firebaseCred = Environment.GetEnvironmentVariable("FIREBASE_CREDENTIALS");
-            //     if (string.IsNullOrEmpty(firebaseCred))
-            //     {
-            //         throw new ArgumentNullException("FIREBASE_CREDENTIALS", "Environment variable is not set.");
-            //     }
-            //
-            //     string jsonCred;
-            //     if (File.Exists(firebaseCred)) // Local: Treat as file path
-            //     {
-            //         jsonCred = File.ReadAllText(firebaseCred);
-            //         Console.WriteLine("Loaded Firebase credentials from file: " + firebaseCred);
-            //     }
-            //     else // Azure: Treat as JSON content
-            //     {
-            //         jsonCred = firebaseCred;
-            //         Console.WriteLine("Loaded Firebase credentials from environment variable.");
-            //     }
-            //
-            //     FirebaseApp.Create(new AppOptions()
-            //     {
-            //         Credential = GoogleCredential.FromJson(jsonCred)
-            //     });
-            //     Console.WriteLine("Firebase initialized successfully.");
-            // }
-            // catch (Exception ex)
-            // {
-            //     Console.WriteLine($"Firebase initialization failed: {ex.Message}");
-            //     throw;
-            // }
+            var firebaseConfig = builder.Configuration.GetSection("FirebaseCredentials");
+            string jsonCred;
+
+            try
+            {
+                if (!firebaseConfig.Exists())
+                {
+                    throw new ArgumentNullException("FirebaseCredentials", "Firebase credentials not found in appsettings.json.");
+                }
+                
+                jsonCred = JsonSerializer.Serialize(firebaseConfig.Get<Dictionary<string, string>>());
+                Console.WriteLine("Loaded Firebase credentials from appsettings.json.");
+                
+                var projectId = firebaseConfig["project_id"];
+                if (!string.IsNullOrEmpty(projectId))
+                {
+                    Console.WriteLine($"Service Account Project ID: {projectId}");
+                }
+                else
+                {
+                    Console.WriteLine("No Project ID found in appsettings.json.");
+                }
+
+                FirebaseApp.Create(new AppOptions()
+                {
+                    Credential = GoogleCredential.FromJson(jsonCred)
+                });
+                Console.WriteLine("Firebase credentials initialized successfully.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Firebase initialization failed: {ex.Message}");
+                throw;
+            }
             
             builder.Services.AddDbContext<StockMarketDbContext>(options =>
                         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddServices().AddRepositories();
             builder.Services.AddEndpointsApiExplorer();
-            // builder.Services.AddSwaggerGen(c=>
-            // {
-            //     c.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme
-            //     {
-            //         Type = SecuritySchemeType.Http,
-            //         Scheme = "Bearer"
-            //     });
-            // });
             
             builder.Services.AddControllers();
             builder.Services.AddSwaggerGen(c =>
@@ -200,3 +198,44 @@ namespace SWD_API
         }
     }
 }
+
+// try
+// {
+//     var firebaseCred = Environment.GetEnvironmentVariable("FIREBASE_CREDENTIALS");
+//     if (string.IsNullOrEmpty(firebaseCred))
+//     {
+//         throw new ArgumentNullException("FIREBASE_CREDENTIALS", "Environment variable is not set.");
+//     }
+//
+//     string jsonCred;
+//     if (File.Exists(firebaseCred)) // Local: Treat as file path
+//     {
+//         jsonCred = File.ReadAllText(firebaseCred);
+//         Console.WriteLine("Loaded Firebase credentials from file: " + firebaseCred);
+//     }
+//     else // Azure: Treat as JSON content
+//     {
+//         jsonCred = firebaseCred;
+//         Console.WriteLine("Loaded Firebase credentials from environment variable.");
+//     }
+//
+//     FirebaseApp.Create(new AppOptions()
+//     {
+//         Credential = GoogleCredential.FromJson(jsonCred)
+//     });
+//     Console.WriteLine("Firebase initialized successfully.");
+// }
+// catch (Exception ex)
+// {
+//     Console.WriteLine($"Firebase initialization failed: {ex.Message}");
+//     throw;
+// }
+
+// builder.Services.AddSwaggerGen(c=>
+// {
+//     c.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme
+//     {
+//         Type = SecuritySchemeType.Http,
+//         Scheme = "Bearer"
+//     });
+// });

@@ -123,10 +123,10 @@ namespace SWD.Service.Services
                     await SendNotificationAsync(notification);
                     
                     // Set ScheduledTime to now if it was null (for consistency with Create)
-                    // if (!notification.ScheduledTime.HasValue)
-                    // {
+                    if (!notification.ScheduledTime.HasValue)
+                    {
                         notification.ScheduledTime = DateTime.UtcNow.AddHours(7);
-                    // }
+                    }
                 }
                 // If ScheduledTime is still set but status is Active, clear it (optional, based on your logic)
                 else if (notification.ScheduledTime.HasValue && dto.ScheduledTime == null)
