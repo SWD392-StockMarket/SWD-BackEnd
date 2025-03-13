@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SWD.Data;
 
@@ -11,9 +12,11 @@ using SWD.Data;
 namespace SWD.Data.Migrations
 {
     [DbContext(typeof(StockMarketDbContext))]
-    partial class StockMarketDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250312132252_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -317,17 +320,23 @@ namespace SWD.Data.Migrations
             modelBuilder.Entity("SWD.Data.Entities.NotificationUser", b =>
                 {
                     b.Property<int>("NotificationId")
-                        .HasColumnType("int")
-                        .HasColumnOrder(1);
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int")
-                        .HasColumnOrder(2);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NotificationId"));
+
+                    b.Property<int>("NotificationId1")
+                        .HasColumnType("int");
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("NotificationId", "UserId");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("NotificationId");
+
+                    b.HasIndex("NotificationId1");
 
                     b.HasIndex("UserId");
 
@@ -663,7 +672,7 @@ namespace SWD.Data.Migrations
                 {
                     b.HasOne("SWD.Data.Entities.Notification", "Notification")
                         .WithMany("NotificationUsers")
-                        .HasForeignKey("NotificationId")
+                        .HasForeignKey("NotificationId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
