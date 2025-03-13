@@ -11,7 +11,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e234fd2-dc57-46bb-b590-4b4e0dc12ad9" name="Changes" comment="">
-<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/SWD-API/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/SWD-API/appsettings.Development.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SWD.Data/Entities/StockInSession.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Data/Entities/StockInSession.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SWD.Data/Migrations/20250311131541_init.Designer.cs" beforeDir="false" />
@@ -19,10 +18,6 @@
       <change beforePath="$PROJECT_DIR$/SWD.Data/Migrations/20250312132252_Initial.Designer.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/SWD.Data/Migrations/20250312132252_Initial.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/SWD.Data/Migrations/StockMarketDbContextModelSnapshot.cs" beforeDir="false" />
-=======
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/workspace.xml" afterDir="false" />
->>>>>>> 720b1e926c16a59f703a0e41e6bdedc1b218dfc6
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +44,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/SWD392-StockMarket/SWD-BackEnd.git&quot;,
-    &quot;accountId&quot;: &quot;6a07811e-e841-4f4e-a9d0-5b70065c319e&quot;
+    &quot;accountId&quot;: &quot;2f273f37-aa48-463a-b99b-34802e3b7ac2&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
@@ -71,7 +66,6 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-<<<<<<< HEAD
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     ".NET Launch Settings Profile.SWD.API: http.executor": "Run",
@@ -91,26 +85,6 @@
     "DatabaseDriversLRU": [
       "sqlserver",
       "sqlserver.localdb"
-=======
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.SWD.API: https.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.rider.plugins.efcore.settings.EfCoreUiConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;sqlserver.localdb&quot;,
-      &quot;sqlserver&quot;
->>>>>>> 720b1e926c16a59f703a0e41e6bdedc1b218dfc6
     ]
   }
 }]]></component>
@@ -230,11 +204,8 @@
       <workItem from="1741713302624" duration="10438000" />
       <workItem from="1741727101780" duration="990000" />
       <workItem from="1741762154589" duration="16531000" />
-<<<<<<< HEAD
       <workItem from="1741789594157" duration="2074000" />
       <workItem from="1741798099515" duration="14196000" />
-=======
->>>>>>> 720b1e926c16a59f703a0e41e6bdedc1b218dfc6
     </task>
     <servers />
   </component>

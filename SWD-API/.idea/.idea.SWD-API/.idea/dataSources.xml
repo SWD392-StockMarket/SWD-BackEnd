@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Microsoft SQL Server (JetBrains)" uuid="233278ee-08ef-4813-9012-7d545893ac04">
+    <data-source source="LOCAL" name="Microsoft SQL Server (JetBrains) [2]" uuid="c1117c86-9b57-47f5-834d-24d90744a775">
       <driver-ref>sqlserver.jb</driver-ref>
       <synchronize>true</synchronize>
       <configured-by-url>true</configured-by-url>
       <jdbc-driver>com.jetbrains.jdbc.sqlserver.SqlServerDriver</jdbc-driver>
-      <jdbc-url>Server=(local);Database=StockMarketDB;User Id=sa;Password=Abc@1234;Trusted_Connection=True;TrustServerCertificate=True</jdbc-url>
+      <jdbc-url>Server=tcp:swd-db-server.database.windows.net,1433;Database=swd-db;User Id=swd-db-server-admin;Password=GermanyPeach10703</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="Microsoft SQL Server LocalDB (JetBrains)" uuid="53ba24ac-5b53-4fc1-ba44-45aaeeead085">
+      <driver-ref>sqlserver.localdb.jb</driver-ref>
+      <synchronize>true</synchronize>
+      <configured-by-url>true</configured-by-url>
+      <jdbc-driver>com.jetbrains.jdbc.sqlserver.SqlServerDriver</jdbc-driver>
+      <jdbc-url>Server=(local);Database=StockMarketDB;User Id=sa;Password=12345;Trusted_Connection=True;TrustServerCertificate=True</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
