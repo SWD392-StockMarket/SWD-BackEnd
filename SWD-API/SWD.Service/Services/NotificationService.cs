@@ -180,6 +180,8 @@ namespace SWD.Service.Services
                     Topic = "users"
                 };
                 string response = await FirebaseMessaging.DefaultInstance.SendAsync(message);
+                
+                Console.WriteLine($"FCM Response: {response}");
                 Console.WriteLine($"FCM Notification Sent: {response} at {DateTime.UtcNow.AddHours(7)}");
                 notification.Status = "Active";
                 await _notificationRepository.UpdateAsync(notification);
