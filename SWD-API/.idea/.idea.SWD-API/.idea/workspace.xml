@@ -11,11 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e234fd2-dc57-46bb-b590-4b4e0dc12ad9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/SWD.Data/Entities/DeviceToken.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SWD-API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD-API/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SWD-API/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/SWD-API/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SWD-API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/SWD-API/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SWD.Service/Services/NotificationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Service/Services/NotificationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Data/StockMarketDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Data/StockMarketDbContext.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
