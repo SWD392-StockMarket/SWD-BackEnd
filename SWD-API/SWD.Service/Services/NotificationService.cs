@@ -211,35 +211,8 @@ namespace SWD.Service.Services
 
         public async Task SendNotificationAsync(SWDNotification notification)
         {
-            // try
-            // {
-            //     var message = new Message
-            //     {
-            //         Notification = new FCMNotification
-            //         {
-            //             Title = notification.Title,
-            //             Body = notification.Content
-            //         },
-            //         Topic = "users"
-            //     };
-            //     string response = await FirebaseMessaging.DefaultInstance.SendAsync(message);
-            //     
-            //     Console.WriteLine($"FCM Response: {response}");
-            //     Console.WriteLine($"FCM Notification Sent: {response} at {DateTime.UtcNow.AddHours(7)}");
-            //     notification.Status = "Active";
-            //     await _notificationRepository.UpdateAsync(notification);
-            // }
-            // catch (Exception ex)
-            // {
-            //     Console.WriteLine($"Error sending notification: {ex.Message} at {DateTime.UtcNow.AddHours(7)}");
-            //     notification.Status = "Failed";
-            //     await _notificationRepository.UpdateAsync(notification);
-            // }
-
-            var fcmTokens = await _deviceTokenRepository.GetDeviceToken();
             try
             {
-                // Create the message payload
                 var message = new Message
                 {
                     Notification = new FCMNotification
@@ -247,15 +220,12 @@ namespace SWD.Service.Services
                         Title = notification.Title,
                         Body = notification.Content
                     },
-                    Token = fcmTokens.FCMToken // Sending to multiple device tokens
+                    Topic = "users"
                 };
-            
-                // Send the notification
-                var response = await FirebaseMessaging.DefaultInstance.SendAsync(message);
-            
-                Console.WriteLine($"FCM Response: {response} messages were sent successfully.");
-                Console.WriteLine($"FCM Notification Sent at {DateTime.UtcNow.AddHours(7)}");
-            
+                string response = await FirebaseMessaging.DefaultInstance.SendAsync(message);
+                
+                Console.WriteLine($"FCM Response: {response}");
+                Console.WriteLine($"FCM Notification Sent: {response} at {DateTime.UtcNow.AddHours(7)}");
                 notification.Status = "Active";
                 await _notificationRepository.UpdateAsync(notification);
             }
@@ -265,6 +235,36 @@ namespace SWD.Service.Services
                 notification.Status = "Failed";
                 await _notificationRepository.UpdateAsync(notification);
             }
+            //
+            // var fcmTokens = await _deviceTokenRepository.GetDeviceToken();
+            // try
+            // {
+            //     // Create the message payload
+            //     var message = new Message
+            //     {
+            //         Notification = new FCMNotification
+            //         {
+            //             Title = notification.Title,
+            //             Body = notification.Content
+            //         },
+            //         Token = fcmTokens.FCMToken // Sending to multiple device tokens
+            //     };
+            //
+            //     // Send the notification
+            //     var response = await FirebaseMessaging.DefaultInstance.SendAsync(message);
+            //
+            //     Console.WriteLine($"FCM Response: {response} messages were sent successfully.");
+            //     Console.WriteLine($"FCM Notification Sent at {DateTime.UtcNow.AddHours(7)}");
+            //
+            //     notification.Status = "Active";
+            //     await _notificationRepository.UpdateAsync(notification);
+            // }
+            // catch (Exception ex)
+            // {
+            //     Console.WriteLine($"Error sending notification: {ex.Message} at {DateTime.UtcNow.AddHours(7)}");
+            //     notification.Status = "Failed";
+            //     await _notificationRepository.UpdateAsync(notification);
+            // }
         }
 
         private static NotificationDTO MapToDTO(SWDNotification notification)

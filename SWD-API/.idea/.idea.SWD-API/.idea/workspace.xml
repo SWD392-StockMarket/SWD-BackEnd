@@ -11,23 +11,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e234fd2-dc57-46bb-b590-4b4e0dc12ad9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/SWD.Repository/Interface/IDeviceTokenRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SWD.Repository/Repositories/DeviceTokenRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SWD.Service/Interface/IDeviceTokenService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SWD.Service/Services/DeviceTokenService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SWD-API/Controllers/AuthController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD-API/Controllers/AuthController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SWD-API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD-API/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SWD.Data/Migrations/20250311131541_init.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SWD.Data/Migrations/20250311131541_init.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SWD.Data/Migrations/20250312132252_Initial.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SWD.Data/Migrations/20250312132252_Initial.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD-API/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/SWD-API/appsettings.Development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD-API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/SWD-API/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Data/Migrations/20250316050752_Initial.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Data/Migrations/20250316050752_Initial.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/SWD.Data/Migrations/StockMarketDbContextModelSnapshot.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SWD.Data/StockMarketDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Data/StockMarketDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SWD.Repository/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Repository/DependencyInjection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SWD.Service/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Service/DependencyInjection.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SWD.Service/Services/NotificationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Service/Services/NotificationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Service/Services/UsersStatsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Service/Services/UsersStatsService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +49,7 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c69576b4a074ad2839225611609498e344b7e2819997af48dbb2d2f8257f3/EntityFrameworkQueryableExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d8d9726f3deb1bbf671f5b791e4dc3e0338219a996f439ad2a69024b825c60/UserManager.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
@@ -253,28 +245,8 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/SWD-API/Controllers/StockController.cs</url>
           <line>63</line>
-          <properties documentPath="D:\studying\FPT-lessons\SWD-392\SourceCode\SWD-API\SWD-API\Controllers\StockController.cs" containingFunctionPresentation="Method 'CreateStock'">
-            <startOffsets>
-              <option value="2164" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2165" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\studying\FPT-lessons\SWD-392\SourceCode\SWD-API\SWD-API\Controllers\StockController.cs" containingFunctionPresentation="Method 'CreateStock'" />
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/SWD.Service/Services/NotificationService.cs</url>
-          <line>171</line>
-          <properties documentPath="D:\studying\FPT-lessons\SWD-392\SourceCode\SWD-API\SWD.Service\Services\NotificationService.cs" containingFunctionPresentation="Method 'SendNotificationAsync'">
-            <startOffsets>
-              <option value="7146" />
-            </startOffsets>
-            <endOffsets>
-              <option value="7147" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
