@@ -23,7 +23,7 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore SWD-API/*.sln
       - name: Build
-        run: dotnet build SWD-API/*.sln --no-restore 
+        run: dotnet build SWD-API/*.sln --no-restore -c Release
       - name: Publish
         run: dotnet publish ./SWD-API/SWD-API/SWD.API.csproj -o ${{env.DOTNET_ROOT}}/api --no-build 
       - name: Upload a Build Artifact
