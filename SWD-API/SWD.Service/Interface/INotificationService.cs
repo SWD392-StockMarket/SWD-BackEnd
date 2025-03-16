@@ -13,7 +13,7 @@ namespace SWD.Service.Interface
     public interface INotificationService
     {
         Task<PageListResponse<NotificationDTO>> GetNotificationsAsync(
-            string? searchTerm, string? sortColumn, string? sortOrder, int page = 1, int pageSize = 20);
+            string? searchTerm,string? typeFilter, string? sortColumn, string? sortOrder, int page = 1, int pageSize = 20);
 
         Task<NotificationDTO> GetNotificationByIdAsync(int id);
 

@@ -12,9 +12,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2e234fd2-dc57-46bb-b590-4b4e0dc12ad9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SWD-API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD-API/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SWD-API/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/SWD-API/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SWD-API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/SWD-API/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD-API/Controllers/NotificationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD-API/Controllers/NotificationController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Service/Interface/INotificationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Service/Interface/INotificationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Service/Services/NewsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Service/Services/NewsService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SWD.Service/Services/NotificationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Service/Services/NotificationService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -207,6 +207,10 @@
       <workItem from="1741852292236" duration="1674000" />
       <workItem from="1741946392436" duration="2009000" />
       <workItem from="1741960731301" duration="366000" />
+      <workItem from="1741961798746" duration="725000" />
+      <workItem from="1742089785782" duration="6420000" />
+      <workItem from="1742097199862" duration="489000" />
+      <workItem from="1742098039820" duration="308000" />
     </task>
     <servers />
   </component>

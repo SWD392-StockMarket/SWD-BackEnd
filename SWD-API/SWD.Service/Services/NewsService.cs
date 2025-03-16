@@ -19,15 +19,19 @@ namespace SWD.Service.Services
 
         public async Task<PageListResponse<NewsDTO>> GetNewsAsync(string? searchTerm, string? sortColumn, string? sortOrder, int page = 1, int pageSize = 20)
         {
-            var newsList = await _newsRepository.GetAllAsync();
+            var newsList = await _newsRepository.GetAllAsync(n => n.Status != "Deleted" 
+                                                                  && (string.IsNullOrWhiteSpace(searchTerm) 
+                                                                      || n.Content.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) 
+                                                                      || n.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+            );
 
             // Apply search filter
-            if (!string.IsNullOrWhiteSpace(searchTerm))
-            {
-                newsList = newsList.Where(n =>
-                    (n.Title != null && n.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
-                    (n.Content != null && n.Content.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)));
-            }
+            // if (!string.IsNullOrWhiteSpace(searchTerm))
+            // {
+            //     newsList = newsList.Where(n =>
+            //         (n.Title != null && n.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
+            //         (n.Content != null && n.Content.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)));
+            // }
 
             // Apply sorting
             if (!string.IsNullOrWhiteSpace(sortColumn))

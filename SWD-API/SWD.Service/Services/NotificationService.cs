@@ -21,18 +21,61 @@ namespace SWD.Service.Services
         {
             _notificationRepository = notificationRepository;
         }
-
-        public async Task<PageListResponse<NotificationDTO>> GetNotificationsAsync(string? searchTerm, string? sortColumn, string? sortOrder, int page = 1, int pageSize = 20)
+        //
+        // public async Task<PageListResponse<NotificationDTO>> GetNotificationsAsync(string? searchTerm, string? sortColumn, string? sortOrder, int page = 1, int pageSize = 20)
+        // {
+        //     var notifications = await _notificationRepository.GetAllAsync();
+        //
+        //     // Apply search filter
+        //     if (!string.IsNullOrWhiteSpace(searchTerm))
+        //     {
+        //         notifications = notifications.Where(n => n.Content.Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
+        //     }
+        //
+        //     // Apply sorting
+        //     if (!string.IsNullOrWhiteSpace(sortColumn))
+        //     {
+        //         notifications = sortOrder?.ToLower() == "desc"
+        //             ? notifications.OrderByDescending(GetSortProperty(sortColumn))
+        //             : notifications.OrderBy(GetSortProperty(sortColumn));
+        //     }
+        //
+        //     var totalCount = notifications.Count();
+        //
+        //     // Apply pagination
+        //     var paginatedNotifications = notifications
+        //         .Skip((page - 1) * pageSize)
+        //         .Take(pageSize)
+        //         .ToList();
+        //
+        //     return new PageListResponse<NotificationDTO>
+        //     {
+        //         Items = paginatedNotifications.Select(MapToDTO).ToList(),
+        //         Page = page,
+        //         PageSize = pageSize,
+        //         TotalCount = totalCount,
+        //         HasNextPage = (page * pageSize) < totalCount,
+        //         HasPreviousPage = page > 1
+        //     };
+        // }
+        
+        public async Task<PageListResponse<NotificationDTO>> GetNotificationsAsync(
+            string? searchTerm, 
+            string? typeFilter, 
+            string? sortColumn, 
+            string? sortOrder, 
+            int page = 1, 
+            int pageSize = 20)
         {
-            var notifications = await _notificationRepository.GetAllAsync();
+            var notifications = await _notificationRepository.GetAllAsync(
+                n => n.Status != "Deleted" 
+                     && (typeFilter == null || n.Type == typeFilter)
+                     && (string.IsNullOrWhiteSpace(searchTerm) 
+                         || n.Content.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) 
+                         || n.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+            );
+            
 
-            // Apply search filter
-            if (!string.IsNullOrWhiteSpace(searchTerm))
-            {
-                notifications = notifications.Where(n => n.Content.Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
-            }
-
-            // Apply sorting
             if (!string.IsNullOrWhiteSpace(sortColumn))
             {
                 notifications = sortOrder?.ToLower() == "desc"
@@ -41,8 +84,6 @@ namespace SWD.Service.Services
             }
 
             var totalCount = notifications.Count();
-
-            // Apply pagination
             var paginatedNotifications = notifications
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
