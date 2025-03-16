@@ -18,13 +18,13 @@ public partial class StockMarketDbContext : IdentityDbContext<User, IdentityRole
     {
     }
     
-    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    // {
-    //     if (!optionsBuilder.IsConfigured)
-    //     {
-    //         optionsBuilder.UseSqlServer("Server=(local);Database=StockMarketDB;User Id=sa;Password=Abc@1234;Trusted_Connection=True;TrustServerCertificate=True");
-    //    }
-    // }
+    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //{
+    //    if (!optionsBuilder.IsConfigured)
+    //    {
+    //        optionsBuilder.UseSqlServer("Server=(local);Database=StockMarketDB;User Id=sa;Password=Abc@1234;Trusted_Connection=True;TrustServerCertificate=True");
+    //   }
+    //}
 
 
     public virtual DbSet<Company> Companies { get; set; }

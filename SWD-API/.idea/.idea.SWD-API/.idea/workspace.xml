@@ -11,9 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e234fd2-dc57-46bb-b590-4b4e0dc12ad9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SWD-API/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/SWD-API/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SWD-API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/SWD-API/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Data/Migrations/StockMarketDbContextModelSnapshot.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/SWD.Data/StockMarketDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Data/StockMarketDbContext.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,6 +45,8 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c69576b4a074ad2839225611609498e344b7e2819997af48dbb2d2f8257f3/EntityFrameworkQueryableExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d8d9726f3deb1bbf671f5b791e4dc3e0338219a996f439ad2a69024b825c60/UserManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Admin/RiderProjects/SWD-BackEnd1/SWD-API/SWD.Data/StockMarketDbContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Admin/RiderProjects/SWD-BackEnd1/SWD-API/SWD.Data/StockMarketDbContext.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -63,27 +63,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.SWD.API: https.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.tools&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Launch Settings Profile.SWD.API: https.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "Merging main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "configurable.group.tools",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;sqlserver&quot;,
-      &quot;sqlserver.localdb&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlserver",
+      "sqlserver.localdb"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.SWD.API: https">
     <configuration name="Unnamed" type="CompoundRunConfigurationType">
       <toRun name="SWD.API: https" type="LaunchSettings" />
