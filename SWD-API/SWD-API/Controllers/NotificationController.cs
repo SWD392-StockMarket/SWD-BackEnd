@@ -24,6 +24,7 @@ namespace SWD_API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetNotifications(
             [FromQuery] string? searchTerm,
+            [FromQuery] string? typeFilter,
             [FromQuery] string? sortColumn,
             [FromQuery] string? sortOrder,
             [FromQuery] int page = 1,
@@ -31,7 +32,12 @@ namespace SWD_API.Controllers
         {
             try
             {
-                var notifications = await _notificationService.GetNotificationsAsync(searchTerm, sortColumn, sortOrder, page, pageSize);
+                
+                if (page < 1)
+                    return BadRequest(new { Message = "Page number must be greater than 0." });
+                if (pageSize < 1 || pageSize > 10)
+                    return BadRequest(new { Message = "Page size must be between 1 and 10." });
+                var notifications = await _notificationService.GetNotificationsAsync(searchTerm,typeFilter, sortColumn, sortOrder, page, pageSize);
                 return Ok(notifications);
             }
             catch (Exception ex)
