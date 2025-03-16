@@ -44,6 +44,8 @@ public partial class StockMarketDbContext : IdentityDbContext<User, IdentityRole
     public virtual DbSet<StockHistory> StockHistories { get; set; }
 
     public virtual DbSet<StockInSession> StockInSessions { get; set; }
+    
+    public virtual DbSet<DeviceToken> DeviceTokens { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
 

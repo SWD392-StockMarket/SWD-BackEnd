@@ -14,12 +14,14 @@ namespace SWD_API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
+        private readonly IDeviceTokenService _deviceTokenService;
         
         private readonly UserManager<User> _userManager;
-        public AuthController(IAuthService authService, UserManager<User> userManager)
+        public AuthController(IAuthService authService, UserManager<User> userManager, IDeviceTokenService deviceTokenService)
         {
             _authService = authService;
             _userManager = userManager;
+            _deviceTokenService = deviceTokenService;
         }
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDTO model)
@@ -42,6 +44,28 @@ namespace SWD_API.Controllers
                 userId = user.Id
             });
         }
-        
+
+        [HttpPut("{id}/{fcmToken}")]
+        public async Task<IActionResult> SaveFCMToken(int id ,string fcmToken)
+        {
+            try
+            {
+                var user = await _userManager.FindByIdAsync(id.ToString());
+                if (user != null)
+                {
+                   await _deviceTokenService.CreateDeviceToken(id, fcmToken);
+                   return Ok();
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

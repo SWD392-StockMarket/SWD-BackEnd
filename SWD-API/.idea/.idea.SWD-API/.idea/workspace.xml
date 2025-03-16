@@ -11,11 +11,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e234fd2-dc57-46bb-b590-4b4e0dc12ad9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/SWD.Data/Entities/DeviceToken.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SWD.Repository/Interface/IDeviceTokenRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SWD.Repository/Repositories/DeviceTokenRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SWD.Service/Interface/IDeviceTokenService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SWD.Service/Services/DeviceTokenService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD-API/Controllers/AuthController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD-API/Controllers/AuthController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SWD-API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD-API/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Data/Migrations/20250311131541_init.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Data/Migrations/20250311131541_init.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Data/Migrations/20250312132252_Initial.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Data/Migrations/20250312132252_Initial.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Data/Migrations/StockMarketDbContextModelSnapshot.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/SWD.Data/StockMarketDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Data/StockMarketDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Repository/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Repository/DependencyInjection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Service/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Service/DependencyInjection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Service/Services/NotificationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Service/Services/NotificationService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +54,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/SWD392-StockMarket/SWD-BackEnd.git&quot;,
-    &quot;accountId&quot;: &quot;2f273f37-aa48-463a-b99b-34802e3b7ac2&quot;
+    &quot;accountId&quot;: &quot;6a07811e-e841-4f4e-a9d0-5b70065c319e&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
@@ -63,27 +75,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.SWD.API: https.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.tools&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Launch Settings Profile.SWD.API: https.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "configurable.group.tools",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;sqlserver&quot;,
-      &quot;sqlserver.localdb&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlserver",
+      "sqlserver.localdb"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.SWD.API: https">
     <configuration name="Unnamed" type="CompoundRunConfigurationType">
       <toRun name="SWD.API: https" type="LaunchSettings" />
@@ -207,6 +219,13 @@
       <workItem from="1741852292236" duration="1674000" />
       <workItem from="1741946392436" duration="2009000" />
       <workItem from="1741960731301" duration="366000" />
+      <workItem from="1742065793933" duration="5896000" />
+      <workItem from="1742098450728" duration="4774000" />
+      <workItem from="1742106023500" duration="2086000" />
+      <workItem from="1742109922327" duration="2102000" />
+      <workItem from="1742112397558" duration="728000" />
+      <workItem from="1742113174247" duration="136000" />
+      <workItem from="1742113427118" duration="5331000" />
     </task>
     <servers />
   </component>
@@ -243,6 +262,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/SWD.Service/Services/NotificationService.cs</url>
+          <line>171</line>
+          <properties documentPath="D:\studying\FPT-lessons\SWD-392\SourceCode\SWD-API\SWD.Service\Services\NotificationService.cs" containingFunctionPresentation="Method 'SendNotificationAsync'">
+            <startOffsets>
+              <option value="7146" />
+            </startOffsets>
+            <endOffsets>
+              <option value="7147" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

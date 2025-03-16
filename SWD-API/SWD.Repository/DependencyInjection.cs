@@ -25,6 +25,7 @@ namespace SWD.Repository
             service.AddTransient<IStockRopository, StockRepository>();
             service.AddTransient<IUserRepository, UserRepository>();
             service.AddTransient<IWatchListRepository, WatchListRepository>();
+            service.AddTransient<IDeviceTokenRepository, DeviceTokenRepository>();
 
             return service;
         }

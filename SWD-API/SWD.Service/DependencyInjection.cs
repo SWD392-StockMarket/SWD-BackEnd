@@ -23,6 +23,7 @@ namespace SWD.Service
             service.AddTransient<ISessionService, SessionService>();
             service.AddTransient<INotificationUserService, NotificationUserService>();
             service.AddTransient<IEmailSender<User>, SmtpEmailSender>();
+            service.AddTransient<IDeviceTokenService, DeviceTokenService>();
             //service.AddTransient<IRoomService, RoomService>();
             return service;
         }
