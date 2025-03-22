@@ -30,38 +30,38 @@ namespace SWD_API
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-        try
-        {
-            var firebaseCred = Environment.GetEnvironmentVariable("FIREBASE_CREDENTIALS");
+            try
+            {
+                var firebaseCred = Environment.GetEnvironmentVariable("FIREBASE_CREDENTIALS");
                 if (string.IsNullOrEmpty(firebaseCred))
                 {
                     throw new ArgumentNullException("FIREBASE_CREDENTIALS", "Environment variable is not set.");
                 }
-    
-            string jsonCred;
-            if (File.Exists(firebaseCred)) // Local: Treat as file path
-            {
-            jsonCred = File.ReadAllText(firebaseCred);
-            Console.WriteLine("Loaded Firebase credentials from file: " + firebaseCred);
+
+                string jsonCred;
+                if (File.Exists(firebaseCred)) // Local: Treat as file path
+                {
+                    jsonCred = File.ReadAllText(firebaseCred);
+                    Console.WriteLine("Loaded Firebase credentials from file: " + firebaseCred);
+                }
+                else // Azure: Treat as JSON content
+                {
+                    jsonCred = firebaseCred;
+                    Console.WriteLine("Loaded Firebase credentials from environment variable.");
+                }
+
+                FirebaseApp.Create(new AppOptions()
+                {
+                    Credential = GoogleCredential.FromJson(jsonCred)
+                });
+                Console.WriteLine("Firebase initialized successfully.");
             }
-            else // Azure: Treat as JSON content
+            catch (Exception ex)
             {
-                jsonCred = firebaseCred;
-                Console.WriteLine("Loaded Firebase credentials from environment variable.");
+                Console.WriteLine($"Firebase initialization failed: {ex.Message}");
+                throw;
             }
 
-            FirebaseApp.Create(new AppOptions()
-            {
-                Credential = GoogleCredential.FromJson(jsonCred)
-            });
-            Console.WriteLine("Firebase initialized successfully.");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Firebase initialization failed: {ex.Message}");
-            throw;
-        }
-        
             builder.Services.AddDbContext<StockMarketDbContext>(options =>
                         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -121,26 +121,21 @@ namespace SWD_API
                 options.RequireHttpsMetadata = false;
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
-                    ValidAudience = builder.Configuration["JWT:ValidAudience"],
+                    ValidIssuer = builder.Configuration["JWT:Issuer"],
+                    ValidAudience = builder.Configuration["JWT:Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret))
                 };
 
             });
-            builder.Services.AddHostedService<NotificationBackgroundService>();
-
-            
-
             builder.Services.AddAuthorization();
-
-            //builder.Services.AddIdentityCore<User>()
-            //    .AddRoles<IdentityRole<int>>()
-            //    .AddEntityFrameworkStores<StockMarketDbContext>();
-            //.AddDefaultTokenProviders();
+            builder.Services.AddIdentity<User, IdentityRole<int>>()
+                .AddEntityFrameworkStores<StockMarketDbContext>()
+                .AddDefaultTokenProviders();
+            builder.Services.AddHostedService<NotificationBackgroundService>();
 
             builder.Services.AddLogging(logging =>
             {
@@ -148,9 +143,7 @@ namespace SWD_API
             });
             
             builder.Services.AddScoped<IUsersStatsService, UsersStatsService>();
-            builder.Services.AddIdentity<User, IdentityRole<int>>()
-                .AddEntityFrameworkStores<StockMarketDbContext>()
-                .AddDefaultTokenProviders();
+            
             var app = builder.Build();
             
             app.UseCors(x =>
@@ -163,11 +156,7 @@ namespace SWD_API
             app.UseSwagger();
             app.UseSwaggerUI();
             
-            app.UseCors(x => 
-                x.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-            );
+            
 
             
             app.Use(async (context, next) =>
@@ -181,12 +170,13 @@ namespace SWD_API
             });
 
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
+            app.MapGroup("api/identity").MapIdentityApi<User>();
+
             app.UseAuthentication();
             app.UseAuthorization();
-
-            app.MapGroup("api/identity").MapIdentityApi<User>();
             app.MapControllers();
+
 
             app.Run();
             
