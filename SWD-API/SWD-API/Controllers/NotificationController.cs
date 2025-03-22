@@ -3,6 +3,8 @@ using SWD.Service.Interface;
 using SWD.Data.DTOs.Notification;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SWD_API.Controllers
 {
@@ -21,6 +23,7 @@ namespace SWD_API.Controllers
         /// <summary>
         /// Get a paginated list of notifications with optional search and sorting.
         /// </summary>
+        [Authorize(Roles = "MARKETANALIZER",AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet]
         public async Task<IActionResult> GetNotifications(
             [FromQuery] string? searchTerm,
@@ -32,7 +35,6 @@ namespace SWD_API.Controllers
         {
             try
             {
-                
                 if (page < 1)
                     return BadRequest(new { Message = "Page number must be greater than 0." });
                 if (pageSize < 1 || pageSize > 10)
@@ -70,6 +72,7 @@ namespace SWD_API.Controllers
         /// <summary>
         /// Create a new notification.
         /// </summary>
+        [Authorize(Roles = "MARKETANALIZER",AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         public async Task<IActionResult> CreateNotification([FromBody] CreateNotificationDTO dto)
         {
@@ -90,6 +93,7 @@ namespace SWD_API.Controllers
         /// <summary>
         /// Update an existing notification.
         /// </summary>
+        [Authorize(Roles = "MARKETANALIZER",AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateNotification(int id, [FromBody] UpdateNotificationDTO dto)
         {
@@ -114,6 +118,7 @@ namespace SWD_API.Controllers
         /// <summary>
         /// Delete a notification by ID.
         /// </summary>
+        [Authorize(Roles = "MARKETANALIZER",AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteNotification(int id)
         {

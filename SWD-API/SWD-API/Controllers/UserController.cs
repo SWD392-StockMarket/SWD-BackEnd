@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SWD.Data.DTOs.User;
 using SWD.Service.Interface;
@@ -20,6 +21,8 @@ namespace SWD_API.Controllers
         /// <summary>
         /// Get a paginated list of users with optional search and sorting
         /// </summary>
+        
+        [Authorize(Roles = "Admin",AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet]
         public async Task<IActionResult> GetUsers([FromQuery] string? searchTerm, [FromQuery] string? sortColumn, [FromQuery] string? sortOrder, [FromQuery] int page = 1, [FromQuery] int pageSize = 20)
         {
@@ -58,6 +61,7 @@ namespace SWD_API.Controllers
         /// <summary>
         /// Create a new user
         /// </summary>
+        [Authorize(Roles = "Admin",AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserDTO dto)
         {
@@ -100,6 +104,7 @@ namespace SWD_API.Controllers
         /// <summary>
         /// Update an existing user
         /// </summary>
+        [Authorize(Roles = "Admin",AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(int id, [FromBody] UpdateUserDTO dto)
         {
@@ -124,6 +129,7 @@ namespace SWD_API.Controllers
         /// <summary>
         /// Delete a user by ID
         /// </summary>
+        [Authorize(Roles = "Admin",AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
