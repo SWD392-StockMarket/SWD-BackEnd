@@ -1,4 +1,6 @@
-﻿using SWD.Data.DTOs.Stock;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using SWD.Data.DTOs.Stock;
 using SWD.Data.DTOs;
 using SWD.Data.DTOs.Market;
 

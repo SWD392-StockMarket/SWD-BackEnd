@@ -41,5 +41,10 @@ namespace SWD.Repository.Repositories
             }
 
             return await query.ToListAsync();        }
+
+        public Task<Stock?> GetStockBySymbolAsync(string symbol)
+        {
+            return _dbcontext.Stocks.FirstOrDefaultAsync(s => s.StockSymbol.Equals(symbol));
+        }
     }
 }

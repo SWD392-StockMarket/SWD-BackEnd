@@ -24,6 +24,7 @@ public partial class StockInSession
     public decimal? HighPrice { get; set; }
 
     public decimal? LowPrice { get; set; }
+
     [JsonIgnore]
     public virtual Session? Session { get; set; }
     [JsonIgnore]

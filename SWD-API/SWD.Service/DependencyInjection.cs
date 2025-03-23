@@ -24,6 +24,7 @@ namespace SWD.Service
             service.AddTransient<INotificationUserService, NotificationUserService>();
             service.AddTransient<IEmailSender<User>, SmtpEmailSender>();
             service.AddTransient<IDeviceTokenService, DeviceTokenService>();
+            service.AddTransient<IPythonExecuteService, PythonExecuteService>();
             //service.AddTransient<IRoomService, RoomService>();
             return service;
         }

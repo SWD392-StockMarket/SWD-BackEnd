@@ -15,9 +15,14 @@ public partial class Session
 
     public DateTime? StartTime { get; set; }
 
+    public int StockId { get; set; }
+    
     public DateTime? EndTime { get; set; }
 
     public string? Status { get; set; }
     [JsonIgnore]
     public virtual ICollection<StockInSession> StockInSessions { get; set; } = new List<StockInSession>();
+    
+    [JsonIgnore]
+    public virtual Stock? Stock { get; set; }
 }

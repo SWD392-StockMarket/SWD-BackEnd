@@ -1,5 +1,7 @@
 ﻿
 
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using SWD.Data.DTOs.WatchLists;
 using SWD.Data.DTOs;
 

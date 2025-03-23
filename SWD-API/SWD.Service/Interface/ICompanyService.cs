@@ -1,5 +1,7 @@
 ﻿
 
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using SWD.Data.DTOs.Company;
 using SWD.Data.DTOs.Stock;
 using SWD.Data.DTOs;

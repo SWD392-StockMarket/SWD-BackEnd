@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using SWD.Data.Entities;
 using System.Net.Mail;
 using System.Net;
+using System.Threading.Tasks;
 
 
 namespace SWD.Service.Services

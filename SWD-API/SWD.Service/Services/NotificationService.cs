@@ -1,4 +1,6 @@
-﻿using System.Linq.Expressions;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using FirebaseAdmin.Messaging;
 using SWD.Data.Entities;
 using SWD.Data.DTOs;
@@ -6,6 +8,7 @@ using SWD.Data.DTOs.Notification;
 using SWD.Repository.Interface;
 using SWD.Service.Interface;
 using System.Linq;
+using System.Threading.Tasks;
 
 // Alias to avoid ambiguity
 using SWDNotification = SWD.Data.Entities.Notification;
