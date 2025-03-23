@@ -12,8 +12,8 @@ using SWD.Data;
 namespace SWD.Data.Migrations
 {
     [DbContext(typeof(StockMarketDbContext))]
-    [Migration("20250316050752_Initial")]
-    partial class Initial
+    [Migration("20250316144023_Initialdb")]
+    partial class Initialdb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

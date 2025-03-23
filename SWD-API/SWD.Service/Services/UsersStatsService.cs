@@ -26,17 +26,23 @@ public class UsersStatsService: IUsersStatsService
             .CountAsync();
         
         
+        
         var subscriptionUsers = await _context.UserRoles
-            .Where(ur => ur.UserId == 2)
+            .Where(ur => ur.RoleId == 2)
             .Select(ur => ur.UserId)
             .Distinct()
             .CountAsync();
         
         var nonSubscriptionUsers = totalUsers - subscriptionUsers;
-        var churnRate = totalUsers == 0
+        
+        var totalUsersWithRoles = await _context.UserRoles
+            .Where(ur => ur.RoleId == 2 || ur.RoleId == 4) // Filter for RoleId 2 or 4
+            .Select(ur => ur.UserId)
+            .Distinct() // Ensure no duplicate users
+            .CountAsync();
+        var churnRate = totalUsersWithRoles == 0
             ? 0
-            : (double)await _context.Users.Where(u => u.Status == "INACTIVE")
-                .CountAsync() / totalUsers * 100;
+            : (double)subscriptionUsers / totalUsersWithRoles * 100;
         
         // Calculate GrowthData (cumulative users by month)
         var growthData = await _context.Users

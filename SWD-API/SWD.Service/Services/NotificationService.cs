@@ -214,31 +214,6 @@ namespace SWD.Service.Services
 
         public async Task SendNotificationAsync(SWDNotification notification)
         {
-            // try
-            // {
-            //     var message = new Message
-            //     {
-            //         Notification = new FCMNotification
-            //         {
-            //             Title = notification.Title,
-            //             Body = notification.Content
-            //         },
-            //         Topic = "users"
-            //     };
-            //     string response = await FirebaseMessaging.DefaultInstance.SendAsync(message);
-            //     
-            //     Console.WriteLine($"FCM Response: {response}");
-            //     Console.WriteLine($"FCM Notification Sent: {response} at {DateTime.UtcNow.AddHours(7)}");
-            //     notification.Status = "Active";
-            //     await _notificationRepository.UpdateAsync(notification);
-            // }
-            // catch (Exception ex)
-            // {
-            //     Console.WriteLine($"Error sending notification: {ex.Message} at {DateTime.UtcNow.AddHours(7)}");
-            //     notification.Status = "Failed";
-            //     await _notificationRepository.UpdateAsync(notification);
-            // }
-
             var fcmTokens = await _deviceTokenRepository.GetDeviceToken();
             try
             {
@@ -288,3 +263,28 @@ namespace SWD.Service.Services
         }
     }
 }
+
+// try
+// {
+//     var message = new Message
+//     {
+//         Notification = new FCMNotification
+//         {
+//             Title = notification.Title,
+//             Body = notification.Content
+//         },
+//         Topic = "users"
+//     };
+//     string response = await FirebaseMessaging.DefaultInstance.SendAsync(message);
+//     
+//     Console.WriteLine($"FCM Response: {response}");
+//     Console.WriteLine($"FCM Notification Sent: {response} at {DateTime.UtcNow.AddHours(7)}");
+//     notification.Status = "Active";
+//     await _notificationRepository.UpdateAsync(notification);
+// }
+// catch (Exception ex)
+// {
+//     Console.WriteLine($"Error sending notification: {ex.Message} at {DateTime.UtcNow.AddHours(7)}");
+//     notification.Status = "Failed";
+//     await _notificationRepository.UpdateAsync(notification);
+// }

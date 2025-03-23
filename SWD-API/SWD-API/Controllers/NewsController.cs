@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SWD.Data.DTOs.News;
 using SWD.Service.Interface;
 
@@ -19,6 +21,7 @@ namespace SWD_API.Controllers
         /// <summary>
         /// Get a paginated list of news with optional search and sorting
         /// </summary>
+        [Authorize(Roles = "MARKETANALIZER",AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet]
         public async Task<IActionResult> GetNews([FromQuery] string? searchTerm, [FromQuery] string? sortColumn,
                                                  [FromQuery] string? sortOrder, [FromQuery] int page = 1,
@@ -59,6 +62,7 @@ namespace SWD_API.Controllers
         /// <summary>
         /// Create a new news article
         /// </summary>
+        [Authorize(Roles = "MARKETANALIZER",AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         public async Task<IActionResult> CreateNews([FromBody] CreateNewsDTO dto)
         {
@@ -79,6 +83,7 @@ namespace SWD_API.Controllers
         /// <summary>
         /// Update an existing news article
         /// </summary>
+        [Authorize(Roles = "MARKETANALIZER",AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateNews(int id, [FromBody] UpdateNewsDTO dto)
         {
@@ -103,6 +108,7 @@ namespace SWD_API.Controllers
         /// <summary>
         /// Delete a news article by ID
         /// </summary>
+        [Authorize(Roles = "MARKETANALIZER",AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteNews(int id)
         {

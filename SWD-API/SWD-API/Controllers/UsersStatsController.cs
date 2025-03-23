@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SWD.Service.Interface;
@@ -15,9 +16,9 @@ namespace SWD_API.Controllers;
             _userStatsService = userStatsService;
         }
 
-        // ✅ GET /api/user-stats
-        // [Authorize (Roles = "Admin")]
-        [HttpGet]
+    // ✅ GET /api/user-stats
+    [Authorize(Roles = "Admin",AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
+    [HttpGet]
         public async Task<IActionResult> GetUsersStats()
         {
             var stats = await _userStatsService.GetUsersStatsAsync();
