@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using SWD.Data.DTOs;
+using SWD.Data.DTOs.Stock;
 using SWD.Data.DTOs.WatchLists;
 using SWD.Data.Entities;
 using SWD.Repository.Interface;
@@ -14,10 +15,26 @@ namespace SWD.Service.Services
     {
         
             private readonly IWatchListRepository _watchListRepository;
+            private readonly IStockRopository _stockRepository;
 
-            public WatchListService(IWatchListRepository watchListRepository)
+
+            public WatchListService(IWatchListRepository watchListRepository, IStockRopository stockRepository)
             {
                 _watchListRepository = watchListRepository;
+                _stockRepository = stockRepository;
+            }
+            
+            public async Task<WatchListDTO> AddStockToWatchListAsync(int watchListId, int stockId)
+            {
+                var stock =await _stockRepository.GetAsync(s => s.StockId == stockId);
+                
+                var watchList =await _watchListRepository.GetAsync(w => w.WatchListId == watchListId);
+
+                watchList.Stocks.Add(stock);
+
+                await _watchListRepository.UpdateAsync(watchList);
+                
+                return MapWatchListToDTO(watchList);
             }
 
             public async Task<PageListResponse<WatchListDTO>> GetWatchListsAsync(string? searchTerm, string? sortColumn, string? sortOrder, int page = 1, int pageSize = 20)
@@ -124,6 +141,19 @@ namespace SWD.Service.Services
 
             private static WatchListDTO MapWatchListToDTO(WatchList watchList)
             {
+                var stockDTOs = watchList.Stocks
+                    .Select(s => new StockDTO
+                    {
+                        StockId = s.StockId,
+                        CompanyId = s.CompanyId,
+                        StockSymbol = s.StockSymbol,
+                        MarketId = s.MarketId,
+                        ListedDate = s.ListedDate,
+                        CompanyName = s.Company?.CompanyName,
+                        MarketName = s.Market?.MarketName,
+                    })
+                    .ToList();
+                
                 return new WatchListDTO
                 {
                     WatchListId = watchList.WatchListId,
@@ -131,7 +161,9 @@ namespace SWD.Service.Services
                     Label = watchList.Label,
                     CreatedDate = watchList.CreatedDate,
                     LastEdited = watchList.LastEdited,
-                    Status = watchList.Status
+                    Status = watchList.Status,
+                    Stocks = stockDTOs
+
                 };
             }
 

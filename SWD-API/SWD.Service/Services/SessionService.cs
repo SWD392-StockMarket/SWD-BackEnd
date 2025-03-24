@@ -118,6 +118,12 @@ namespace SWD.Service.Services
             return session.StockInSessions.ToList();
         }
 
+        public async Task<List<SessionDTO>> GetSessionsAsyncByStockId(int stockId)
+        {
+            var list = await _sessionRepository.GetSessionsByStockIdAsync(stockId);
+            return MapSessionsToDTOs(list);
+        }
+
         private static Func<Session, object> GetSortProperty(string sortColumn)
         {
             return sortColumn?.ToLower() switch

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SWD.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Initialdb : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -88,22 +88,6 @@ namespace SWD.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Markets", x => x.MarketId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Sessions",
-                columns: table => new
-                {
-                    SessionId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SessionType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    EndTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Sessions", x => x.SessionId);
                 });
 
             migrationBuilder.CreateTable(
@@ -376,6 +360,53 @@ namespace SWD.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Sessions",
+                columns: table => new
+                {
+                    SessionId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SessionType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    StockId = table.Column<int>(type: "int", nullable: false),
+                    EndTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sessions", x => x.SessionId);
+                    table.ForeignKey(
+                        name: "FK_Sessions_Stocks_StockId",
+                        column: x => x.StockId,
+                        principalTable: "Stocks",
+                        principalColumn: "StockId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StockWatchList",
+                columns: table => new
+                {
+                    StocksStockId = table.Column<int>(type: "int", nullable: false),
+                    WatchListsWatchListId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StockWatchList", x => new { x.StocksStockId, x.WatchListsWatchListId });
+                    table.ForeignKey(
+                        name: "FK_StockWatchList_Stocks_StocksStockId",
+                        column: x => x.StocksStockId,
+                        principalTable: "Stocks",
+                        principalColumn: "StockId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_StockWatchList_WatchLists_WatchListsWatchListId",
+                        column: x => x.WatchListsWatchListId,
+                        principalTable: "WatchLists",
+                        principalColumn: "WatchListId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "StockInSessions",
                 columns: table => new
                 {
@@ -402,30 +433,6 @@ namespace SWD.Data.Migrations
                         column: x => x.StockId,
                         principalTable: "Stocks",
                         principalColumn: "StockId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "StockWatchList",
-                columns: table => new
-                {
-                    StocksStockId = table.Column<int>(type: "int", nullable: false),
-                    WatchListsWatchListId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StockWatchList", x => new { x.StocksStockId, x.WatchListsWatchListId });
-                    table.ForeignKey(
-                        name: "FK_StockWatchList_Stocks_StocksStockId",
-                        column: x => x.StocksStockId,
-                        principalTable: "Stocks",
-                        principalColumn: "StockId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_StockWatchList_WatchLists_WatchListsWatchListId",
-                        column: x => x.WatchListsWatchListId,
-                        principalTable: "WatchLists",
-                        principalColumn: "WatchListId",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -497,6 +504,11 @@ namespace SWD.Data.Migrations
                 name: "IX_NotificationUsers_UserId",
                 table: "NotificationUsers",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Sessions_StockId",
+                table: "Sessions",
+                column: "StockId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StockInSessions_SessionId",
@@ -575,19 +587,19 @@ namespace SWD.Data.Migrations
                 name: "Sessions");
 
             migrationBuilder.DropTable(
+                name: "WatchLists");
+
+            migrationBuilder.DropTable(
                 name: "Stocks");
 
             migrationBuilder.DropTable(
-                name: "WatchLists");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Companies");
 
             migrationBuilder.DropTable(
                 name: "Markets");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
         }
     }
 }

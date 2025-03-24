@@ -8,5 +8,6 @@ namespace SWD.Repository.Interface
 {
     public interface ISessionRepository : IRepository<Session>
     {
+        Task<List<Session>> GetSessionsByStockIdAsync(int stockId);
     }
 }

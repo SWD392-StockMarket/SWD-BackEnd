@@ -17,6 +17,12 @@ namespace SWD_API.Controllers
             _sessionService = sessionService;
         }
 
+        [HttpGet("stocks/{stockId}")]
+        public async Task<IActionResult> GetSessionsByStockId(int stockId)
+        {
+            return Ok(await _sessionService.GetSessionsAsyncByStockId(stockId));
+        }
+
         /// <summary>
         /// Get a paginated list of sessions with optional search and sorting
         /// </summary>

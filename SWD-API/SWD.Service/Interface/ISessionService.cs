@@ -15,5 +15,6 @@ namespace SWD.Service.Interface
         Task<SessionDTO> UpdateSessionAsync(int id, UpdateSessionDTO dto);
         Task<bool> DeleteSessionAsync(int id);
         Task<List<StockInSession>> GetSessionStocksAsync(int sessionId);
+        Task<List<SessionDTO>> GetSessionsAsyncByStockId(int stockId);
     }
 }

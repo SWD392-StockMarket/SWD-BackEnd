@@ -11,7 +11,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e234fd2-dc57-46bb-b590-4b4e0dc12ad9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SWD-API/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD-API/Controllers/SessionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD-API/Controllers/SessionController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD-API/Controllers/WatchListController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD-API/Controllers/WatchListController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Data/Migrations/20250316144023_Initialdb.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Data/Migrations/20250316144023_Initialdb.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Data/StockMarketDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Data/StockMarketDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Repository/Interface/ISessionRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Repository/Interface/ISessionRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Repository/Repositories/SessionRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Repository/Repositories/SessionRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Service/Interface/ISessionService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Service/Interface/ISessionService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Service/Interface/IWatchListService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Service/Interface/IWatchListService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Service/Services/PythonExecuteService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Service/Services/PythonExecuteService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Service/Services/SessionService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Service/Services/SessionService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWD.Service/Services/WatchListService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SWD.Service/Services/WatchListService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,11 +56,24 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d8d9726f3deb1bbf671f5b791e4dc3e0338219a996f439ad2a69024b825c60/UserManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/studying/FPT-lessons/SWD-392/SourceCode/SWD-API/SWD-API/Controllers/WatchListController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/studying/FPT-lessons/SWD-392/SourceCode/SWD-API/SWD-API/Controllers/WatchListController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/studying/FPT-lessons/SWD-392/SourceCode/SWD-API/SWD.Data/StockMarketDbContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/studying/FPT-lessons/SWD-392/SourceCode/SWD-API/SWD.Data/StockMarketDbContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/studying/FPT-lessons/SWD-392/SourceCode/SWD-API/SWD.Service/Interface/IWatchListService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/studying/FPT-lessons/SWD-392/SourceCode/SWD-API/SWD.Service/Interface/IWatchListService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/studying/FPT-lessons/SWD-392/SourceCode/SWD-API/SWD.Service/Interface/IWatchListService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/studying/FPT-lessons/SWD-392/SourceCode/SWD-API/SWD.Service/Interface/IWatchListService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/studying/FPT-lessons/SWD-392/SourceCode/SWD-API/SWD.Service/Services/WatchListService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/studying/FPT-lessons/SWD-392/SourceCode/SWD-API/SWD.Service/Services/WatchListService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/studying/FPT-lessons/SWD-392/SourceCode/SWD-API/SWD.Service/Services/WatchListService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/studying/FPT-lessons/SWD-392/SourceCode/SWD-API/SWD.Service/Services/WatchListService.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
 }</component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -216,12 +242,14 @@
       <workItem from="1742194167007" duration="291000" />
       <workItem from="1742708104523" duration="9417000" />
       <workItem from="1742718653334" duration="11017000" />
+      <workItem from="1742779336031" duration="3212000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.py" />
@@ -239,6 +267,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -25,17 +25,17 @@ public class PythonExecuteService : IPythonExecuteService
     
     public async Task GetStockHistory(string symbol, string startDate, string endDate)
     {
+        var stock = await _stockRepository.GetStockBySymbolAsync(symbol);
         
         var session = new Session
         {
             SessionType = "History",
+            StockId = stock.StockId,
             StartTime = DateTime.Parse(startDate),
             EndTime = DateTime.Parse(endDate),
             Status = "Past"
         };
 
-        var stock = await _stockRepository.GetStockBySymbolAsync(symbol);
-        
         await _sessionRepository.AddAsync(session);
         
 // Get the base directory (bin/Debug/net8.0/)
