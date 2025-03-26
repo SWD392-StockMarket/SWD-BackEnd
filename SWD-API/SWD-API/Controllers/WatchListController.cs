@@ -61,17 +61,14 @@ namespace SWD_API.Controllers
         /// Get watchlists by User ID
         /// </summary>
         [HttpGet("user/{userId}")]
-        public async Task<IActionResult> GetWatchListsByUserId(int userId)
+        public async Task<IActionResult> GetWatchlistsByUserId(int userId, [FromQuery] string? searchTerm)
         {
-            try
+            var watchlists = await _watchListService.GetWatchListsByUserIdAsync(userId, searchTerm);
+            if (watchlists == null || !watchlists.Any())
             {
-                var watchLists = await _watchListService.GetWatchListsByUserIdAsync(userId);
-                return Ok(watchLists);
+                return NotFound("Không tìm thấy danh sách theo dõi nào.");
             }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { Message = "An error occurred while retrieving watchlists for the user.", Error = ex.Message });
-            }
+            return Ok(watchlists);
         }
 
         /// <summary>

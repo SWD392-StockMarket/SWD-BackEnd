@@ -85,10 +85,34 @@ namespace SWD.Service.Services
                                  ?? throw new KeyNotFoundException("Watchlist not found.");
                 return MapWatchListToDTO(watchList);
             }
-            public async Task<IEnumerable<WatchListDTO>> GetWatchListsByUserIdAsync(int userId)
+            public async Task<IEnumerable<WatchListDTO>> GetWatchListsByUserIdAsync(int userId, string? searchTerm = null)
             {
-                var watchLists = await _watchListRepository.GetAllAsync(w => w.UserId == userId, includeProperties:"Stocks");
+                // Lấy tất cả watchlist của user với các quan hệ liên quan
+                var watchLists = await _watchListRepository.GetAllAsync(
+                    w => w.UserId == userId,
+                    includeProperties: "Stocks,Stocks.Company,Stocks.Market"
+                );
 
+                // Kiểm tra dữ liệu gốc
+                if (watchLists == null || !watchLists.Any())
+                {
+                    return Enumerable.Empty<WatchListDTO>(); // Trả về rỗng nếu không có dữ liệu
+                }
+
+                // Chỉ lọc nếu searchTerm hợp lệ (khác null và không rỗng)
+                if (!string.IsNullOrWhiteSpace(searchTerm)) // Dùng IsNullOrWhiteSpace để chắc chắn
+                {
+                    watchLists = watchLists.Select(w =>
+                    {
+                        w.Stocks = w.Stocks.Where(s =>
+                            s.StockSymbol.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                            (s.Company?.CompanyName != null && s.Company.CompanyName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+                        ).ToList();
+                        return w;
+                    }).Where(w => w.Stocks.Any()).ToList(); // Chỉ giữ lại watchlist có ít nhất 1 stock khớp
+                }
+
+                // Chuyển đổi sang DTO và trả về
                 return watchLists.Select(MapWatchListToDTO).ToList();
             }
         public async Task<WatchListDTO> CreateWatchListAsync(CreateWatchListDTO dto)

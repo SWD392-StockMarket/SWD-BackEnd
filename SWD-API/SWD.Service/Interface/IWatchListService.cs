@@ -15,7 +15,7 @@ namespace SWD.Service.Interface
 
         Task<WatchListDTO> CreateWatchListAsync(CreateWatchListDTO dto);
 
-        Task<IEnumerable<WatchListDTO>> GetWatchListsByUserIdAsync(int userId);
+        Task<IEnumerable<WatchListDTO>> GetWatchListsByUserIdAsync(int userId, string? searchTerm);
         Task<WatchListDTO> UpdateWatchListAsync(int id, UpdateWatchListDTO dto);
 
         Task<bool> DeleteWatchListAsync(int id);
