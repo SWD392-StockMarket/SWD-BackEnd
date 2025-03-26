@@ -22,12 +22,11 @@ namespace SWD.Service.Services
     {
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
-        private readonly RoleManager<User> _roleManager;
-        public AuthService(UserManager<User> userManager, IConfiguration configuration, RoleManager<User> roleManager)
+        public AuthService(UserManager<User> userManager, IConfiguration configuration)
         {
             _userManager = userManager; 
             _configuration = configuration;
-            _roleManager = roleManager;
+           
         }
         public IActionResult GoogleLogin()
         {
