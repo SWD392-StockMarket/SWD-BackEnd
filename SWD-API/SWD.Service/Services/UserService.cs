@@ -117,7 +117,8 @@ namespace SWD.Service.Services
                 Status = "Active",
                 PhoneNumber = dto.PhoneNumber,
                 CreatedAt = DateTime.UtcNow.AddHours(7),
-                LastEdited = DateTime.UtcNow.AddHours(7)
+                LastEdited = DateTime.UtcNow.AddHours(7),
+                SubscriptionStatus = "Unsubscribed"
             };
 
             // await _userRepository.AddAsync(user);
