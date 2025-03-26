@@ -21,7 +21,8 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.AspNetCore.Mvc;
 // using Newtonsoft.Json;
 using System.Text.Json; 
-using Microsoft.Extensions.Configuration; 
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authentication.Google;
 
 namespace SWD_API
 {
@@ -110,6 +111,9 @@ namespace SWD_API
             {
                 throw new ArgumentNullException(nameof(jwtSecret), "JWT Secret cannot be null or empty.");
             }
+
+            var googleConfig = builder.Configuration.GetSection("Authentication:Google");
+
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -130,6 +134,11 @@ namespace SWD_API
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret))
                 };
 
+            })
+            .AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
+            {
+                options.ClientId = googleConfig["ClientId"] ?? Environment.GetEnvironmentVariable("Authentication__Google__ClientId");
+                options.ClientSecret = googleConfig["ClientSecret"] ?? Environment.GetEnvironmentVariable("Authentication__Google__ClientSecret");
             });
             builder.Services.AddAuthorization();
             builder.Services.AddIdentity<User, IdentityRole<int>>()
