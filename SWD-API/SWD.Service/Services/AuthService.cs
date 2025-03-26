@@ -22,10 +22,12 @@ namespace SWD.Service.Services
     {
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
-        public AuthService(UserManager<User> userManager, IConfiguration configuration)
+        private readonly RoleManager<User> _roleManager;
+        public AuthService(UserManager<User> userManager, IConfiguration configuration, RoleManager<User> roleManager)
         {
             _userManager = userManager; 
             _configuration = configuration;
+            _roleManager = roleManager;
         }
         public IActionResult GoogleLogin()
         {
@@ -36,7 +38,7 @@ namespace SWD.Service.Services
 
         public async Task<IActionResult> GoogleResponse(HttpContext httpContext)
         {
-            var result = await httpContext.AuthenticateAsync();
+            var result = await httpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
             if (!result.Succeeded) return new BadRequestObjectResult("Google authentication failed.");
 
             var claims = result.Principal.Identities.FirstOrDefault()?.Claims;
@@ -46,8 +48,37 @@ namespace SWD.Service.Services
             if (string.IsNullOrEmpty(email))
                 return new BadRequestObjectResult("Email not found.");
 
-            // Generate JWT token
+            // Find or create the user
             var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                
+                user = new User // Use your custom User class
+                {
+                    UserName = email,
+                    Email = email,
+                    EmailConfirmed = true, // Assuming Google email is verified
+                    Status = "Active", // Optional: Set a default status
+                    CreatedAt = DateTime.UtcNow, // Optional: Set creation timestamp
+                    LastEdited = DateTime.UtcNow, // Optional: Set last edited timestamp
+                    SubscriptionStatus = "Free" // Optional: Set a default subscription status
+                };
+
+                var createResult = await _userManager.CreateAsync(user);
+                if (!createResult.Succeeded)
+                {
+                    return new BadRequestObjectResult(new { Errors = createResult.Errors.Select(e => e.Description) });
+                }
+
+                // Assign the existing "USER" role (assumes it exists with Name = "USER")
+                var addRoleResult = await _userManager.AddToRoleAsync(user, "USER");
+                if (!addRoleResult.Succeeded)
+                {
+                    return new BadRequestObjectResult(new { Errors = addRoleResult.Errors.Select(e => e.Description) });
+                }
+            }
+
+            // Generate JWT token
             var token = GenerateToken(user);
 
             return new OkObjectResult(new { Email = email, Name = name, Token = token });

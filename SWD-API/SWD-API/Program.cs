@@ -135,11 +135,11 @@ namespace SWD_API
                 };
 
             })
-            .AddCookie()
             .AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
             {
                 options.ClientId = googleConfig["ClientId"] ?? Environment.GetEnvironmentVariable("Authentication__Google__ClientId");
                 options.ClientSecret = googleConfig["ClientSecret"] ?? Environment.GetEnvironmentVariable("Authentication__Google__ClientSecret");
+
             });
             builder.Services.AddAuthorization();
             builder.Services.AddIdentity<User, IdentityRole<int>>()
