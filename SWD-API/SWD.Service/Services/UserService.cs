@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using SWD.Data.DTOs;
 using SWD.Data.DTOs.User;
 using SWD.Data.Entities;
@@ -169,7 +170,25 @@ namespace SWD.Service.Services
             await _userRepository.UpdateAsync(user);
             return true;
         }
+        public async Task<bool> ChangeUserRoleToMembers(int userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            if (user == null)
+            {
+                throw new KeyNotFoundException("User not found.");
+            }
 
+            var currentRoles = await _userManager.GetRolesAsync(user);
+            await _userManager.RemoveFromRolesAsync(user, currentRoles); // Remove existing roles
+
+            var result = await _userManager.AddToRoleAsync(user, "MEMBERS");
+            if (!result.Succeeded)
+            {
+                throw new Exception("Failed to update user role.");
+            }
+
+            return true;
+        }
         private static Func<User, object> GetSortProperty(string sortColumn)
         {
             return sortColumn?.ToLower() switch

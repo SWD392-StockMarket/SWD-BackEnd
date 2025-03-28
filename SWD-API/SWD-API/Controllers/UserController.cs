@@ -146,7 +146,23 @@ namespace SWD_API.Controllers
                 return StatusCode(500, new { Message = "An error occurred while deleting the user.", Error = ex.Message });
             }
         }
-
+        [HttpPost("{userId}/change-role")]
+        public async Task<IActionResult> ChangeUserRoleToMembers(int userId)
+        {
+            try
+            {
+                await _userService.ChangeUserRoleToMembers(userId);
+                return Ok(new { message = "User role updated to MEMBERS successfully" });
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
         //[Authorize(Roles ="Admin")]
         //[HttpPut("{userId}/role")]
         //public async Task<IActionResult> UpdateUserRole(int userId, [FromBody] UpdateUserRoleDTO dto)

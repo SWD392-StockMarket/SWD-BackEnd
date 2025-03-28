@@ -3,6 +3,7 @@
 using System.Threading.Tasks;
 using SWD.Data.DTOs.User;
 using SWD.Data.DTOs;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SWD.Service.Interface
 {
@@ -14,6 +15,7 @@ namespace SWD.Service.Interface
         Task<RegisterResponseDTO> RegisterUserAsync(RegisterUserDTO dto);
         Task<UserDTO> UpdateUserAsync(int id, UpdateUserDTO dto);
         Task<bool> DeleteUserAsync(int id);
+        Task<bool> ChangeUserRoleToMembers(int userId);
         //Task<string> UpdateUserRoleAsync(int userId, UpdateUserRoleDTO dto);
     }
 }
